@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:CMP.VistaModelo.Formularios"
+             x:Class="CMP.Vistas.Formularios.AddVehiculo"
+             NavigationPage.HasNavigationBar="False"
+             Visual="Material"
+             BackgroundColor="White">
+
+    <StackLayout>
+        <Frame BackgroundColor="#D48593"
+               HorizontalOptions="FillAndExpand"
+               HeightRequest="64"
+               Margin="0"
+               Padding="0,10,0,20"
+               HasShadow="False"
+               CornerRadius="0">
+            <Grid ColumnDefinitions="64">
+                <ImageButton Source="back.png"
+                             BackgroundColor="#D48593"
+                             HorizontalOptions="Start"
+                             Grid.Column="0"
+                             Margin="15,0,0,0"
+                             Command="{Binding VolverMenuCommand}" />
+                <Label Text="CalMaP"
+                       HorizontalOptions="End"
+                       VerticalOptions="Center"
+                       FontSize="23"
+                       FontAttributes="Bold"
+                       Margin="0,0,40,-10"
+                       TextColor="White"
+                       Grid.Column="1" />
+            </Grid>
+        </Frame>
+        <ScrollView Margin="0,0,0,10">
+            <StackLayout VerticalOptions="Center"
+                         Spacing="20"
+                         Margin="10,0,10,0">
+                <Label Text="Agregar Vehiculo"
+                       HorizontalOptions="Center"
+                       FontSize="Large"
+                       Margin="0,10,0,10" />
+                <Grid VerticalOptions="Center"
+                      HorizontalOptions="Center">
+                    <Frame BackgroundColor="#D48593"
+                           Margin="0,30"
+                           Padding="3"
+                           CornerRadius="250"
+                           HeightRequest="220"
+                           WidthRequest="230"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center">
+                        <Frame BackgroundColor="#F0DCE6"
+                               Padding="0,0,0,0"
+                               CornerRadius="250"
+                               HeightRequest="230"
+                               WidthRequest="230"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                               BorderColor="#D48593">
+                            <Image Source="{Binding Imagen}" />
+                        </Frame>
+                    </Frame>
+
+                    <Frame HorizontalOptions="End"
+                           VerticalOptions="End"
+                           Margin="60,30"
+                           BackgroundColor="#D48593"
+                           CornerRadius="60"
+                           HeightRequest="76"
+                           WidthRequest="76"
+                           Padding="4">
+                        <ImageButton Source="pencil.png"
+                                     BackgroundColor="#E8B5C4"
+                                     BorderColor="#D48593"
+                                     CornerRadius="60"
+                                     HeightRequest="80"
+                                     WidthRequest="80"
+                                     Padding="13" />
+                    </Frame>
+
+                </Grid>
+
+                <Frame CornerRadius="15"
+                       Padding="10"
+                       BackgroundColor="#F7F6F6">
+                    <Entry x:Name="TxtNumeroEconomico"
+                           Placeholder="Numero económico"
+                           Text="{Binding NumeroEconomico}"
+                           FontSize="16" />
+                </Frame>
+                <Frame CornerRadius="15"
+                       BackgroundColor="#F7F6F6"
+                       Padding="10">
+                    <Entry x:Name="TxtNumeroDeSerie"
+                           Text="{Binding NumeroDeSerie}"
+                           Placeholder="Numero de serie de Vehiculo"
+                           FontSize="16" />
+                </Frame>
+                <Frame CornerRadius="15"
+                       BackgroundColor="#F7F6F6"
+                       Padding="10">
+                    <Entry x:Name="TxtNombre"
+                           Placeholder="Nombre de Vehiculo"
+                           Text="{Binding Nombre}"
+                           FontSize="16" />
+                </Frame>
+                <Frame CornerRadius="15"
+                       Padding="10"
+                       BackgroundColor="#F7F6F6">
+                    <Entry x:Name="TxtModelo"
+                           Placeholder="Modelo del vehiculo"
+                           Text="{Binding Modelo}"
+                           FontSize="16" />
+                </Frame>
+                <Frame CornerRadius="15"
+                       BackgroundColor="#F7F6F6"
+                       Padding="10">
+                    <Picker x:Name="TxtTipo"
+                            SelectedItem="{Binding Tipo}"
+                            Title="Tipo de vehiculo"
+                            FontSize="16">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>pesado</x:String>
+                                <x:String>Ligero</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </Frame>
+                <Frame CornerRadius="15"
+                       BackgroundColor="#F7F6F6"
+                       Padding="10">
+                    <Picker x:Name="TxtEstado"
+                            SelectedItem="{Binding Estado}"
+                            Title="Estado del vehiculo"
+                            FontSize="16">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>En uso</x:String>
+                                <x:String>Disponible</x:String>
+                                <x:String>En servicio</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </Frame>
+                <Frame CornerRadius="15"
+                       BackgroundColor="#F7F6F6"
+                       Padding="10">
+                    <Picker x:Name="TxtCantLlantas"
+                            SelectedItem="{Binding CantLlantas}"
+                            FontSize="16"
+                            Title="Cantidad de llantas de vehiculo">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:Int32}">
+                                <x:Int32>4</x:Int32>
+                                <x:Int32>6</x:Int32>
+                                <x:Int32>10</x:Int32>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </Frame>
+                <Frame CornerRadius="15"
+                       BackgroundColor="#F7F6F6"
+                       Padding="10">
+
+                    <Editor x:Name="TxtDatosExtras"
+                            Text="{Binding DatosExtras}"
+                            Placeholder="Datos extras de vehiculo"
+                            FontSize="16"
+                            AutoSize="TextChanges" />
+                </Frame>
+                <Frame CornerRadius="15"
+                       BackgroundColor="#F7F6F6"
+                       Padding="10">
+
+                    <Editor x:Name="TxtObservaciones"
+                            Text="{Binding Observaciones}"
+                            Placeholder="Observaciones del vehiculo"
+                            FontSize="16"
+                            AutoSize="TextChanges" />
+                </Frame>
+                <Frame CornerRadius="15"
+                       BackgroundColor="#F7F6F6"
+                       Padding="10">
+                    <Entry x:Name="TxtKilomtraje"
+                           Text="{Binding Kilometraje}"
+                           FontSize="16"
+                           Placeholder="Kilometraje recorrido"
+                           Keyboard="Numeric" />
+                </Frame>
+                <Frame CornerRadius="15"
+                       BackgroundColor="#F7F6F6"
+                       Padding="10">
+                    <Entry x:Name="TxtHoraInicial"
+                           Text="{Binding HoraInicial}"
+                           Placeholder="Horas iniciales de vehículo"
+                           Keyboard="Numeric"
+                           FontSize="16" />
+                </Frame>
+                <Frame CornerRadius="15"
+                       BackgroundColor="#F7F6F6"
+                       Padding="10">
+                    <Entry x:Name="TxHoraFinal"
+                           Text="{Binding HoraFinal}"
+                           Placeholder="Horas Finales de vehículo"
+                           Keyboard="Numeric"
+                           FontSize="16" />
+                </Frame>
+
+                <Frame CornerRadius="15"
+                       BackgroundColor="#F7F6F6"
+                       Padding="10">
+                    <Editor x:Name="TxtCombustible"
+                            Text="{Binding Combustible}"
+                            Placeholder="Combustible cargado por el vehiculo"
+                            FontSize="16"
+                            Keyboard="Numeric"
+                            HorizontalOptions="FillAndExpand" />
+                </Frame>
+                <Button  Text="Guardar"
+                         x:Name="BttnGuardar"
+                         Command="{Binding GuardarDatosCommando}"
+                         VerticalOptions="Center"
+                         FontSize="15"
+                         Grid.Row="3"
+                         Grid.ColumnSpan="3"
+                         FontAttributes="Bold"
+                         Padding="0"
+                         BackgroundColor="#BE5165"
+                         TextColor="White"
+                         CornerRadius="10"
+                         Margin="0,0,0,70" />
+            </StackLayout>
+        </ScrollView>
+
+    </StackLayout>
+</ContentPage>

@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CMP.Vistas.Formularios.EditarVehiculo"
+             NavigationPage.HasNavigationBar="False"
+             Visual="Material"
+             BackgroundColor="White">
+
+    <StackLayout>
+        <Frame BackgroundColor="#D48593"
+               HorizontalOptions="FillAndExpand"
+               HeightRequest="64"
+               Margin="0"
+               Padding="0,10,0,20"
+               HasShadow="False"
+               CornerRadius="0">
+            <Grid ColumnDefinitions="64">
+                <ImageButton Source="back.png"
+                             BackgroundColor="#D48593"
+                             HorizontalOptions="Start"
+                             Grid.Column="0"
+                             Margin="15,0,0,0"
+                             Command="{Binding VolverMenuCommand}" />
+                <Label Text="CalMaP"
+                       HorizontalOptions="End"
+                       VerticalOptions="Center"
+                       FontSize="23"
+                       FontAttributes="Bold"
+                       Margin="0,0,40,-10"
+                       TextColor="White"
+                       Grid.Column="1" />
+            </Grid>
+        </Frame>
+
+        <ScrollView Margin="0,0,0,10">
+            <StackLayout VerticalOptions="Center"
+                         Spacing="20"
+                         Margin="10,0,10,0">
+                <Entry x:Name="TxtIdVehiculo"
+                       Placeholder="IdVehiculo"
+                       Text="{Binding IdVehiculo}"
+                       FontSize="16"
+                       IsEnabled="False"
+                       IsVisible="False"
+                       TextColor="#B5B5B5" />
+
+                <Label Text="Modificar Vehiculo"
+                       HorizontalOptions="Center"
+                       FontSize="Large"
+                       Margin="0,10,0,10" />
+
+                <Frame CornerRadius="15"
+                       Padding="10"
+                       BackgroundColor="#F7F6F6">
+                    <Entry x:Name="TxtNumeroEconomico"
+                           Placeholder="Numero económico"
+                           Text="{Binding NumeroEconomico}"
+                           FontSize="16"
+                           IsEnabled="False"
+                           TextColor="#B5B5B5" />
+                </Frame>
+                <Frame CornerRadius="15"
+                       BackgroundColor="#F7F6F6"
+                       Padding="10">
+                    <Entry x:Name="TxtNumeroDeSerie"
+                           Text="{Binding NumeroDeSerie}"
+                           Placeholder="Numero de serie de Vehiculo"
+                           FontSize="16"
+                           IsEnabled="False"
+                           TextColor="Gray" />
+                </Frame>
+                <Frame CornerRadius="15"
+                       BackgroundColor="#F7F6F6"
+                       Padding="10">
+                    <Entry x:Name="TxtNombre"
+                           Placeholder="Nombre de Vehiculo"
+                           Text="{Binding Nombre}"
+                           FontSize="16"
+                           IsEnabled="False"
+                           TextColor="#B5B5B5" />
+                </Frame>
+                <Frame CornerRadius="15"
+                       Padding="10"
+                       BackgroundColor="#F7F6F6">
+                    <Entry x:Name="TxtModelo"
+                           Placeholder="Modelo del vehiculo"
+                           Text="{Binding Modelo}"
+                           FontSize="16"
+                           TextColor="#B5B5B5"
+                           IsEnabled="False" />
+                </Frame>
+                <Frame CornerRadius="15"
+                       BackgroundColor="#F7F6F6"
+                       Padding="10">
+                    <Picker x:Name="TxtTipo"
+                            SelectedItem="{Binding Tipo}"
+                            Title="Tipo de vehiculo"
+                            FontSize="16"
+                            IsEnabled="False"
+                            TextColor="#B5B5B5">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>pesado</x:String>
+                                <x:String>Ligero</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </Frame>
+                <Frame CornerRadius="15"
+                       BackgroundColor="#F7F6F6"
+                       Padding="10">
+                    <Picker x:Name="TxtEstado"
+                            SelectedItem="{Binding Estado}"
+                            Title="Estado del vehiculo"
+                            FontSize="16">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>En uso</x:String>
+                                <x:String>Disponible</x:String>
+                                <x:String>En servicio</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </Frame>
+                <Frame CornerRadius="15"
+                       BackgroundColor="#F7F6F6"
+                       Padding="10">
+                    <Picker x:Name="TxtCantLlantas"
+                            SelectedItem="{Binding CantLlantas}"
+                            FontSize="16"
+                            Title="Cantidad de llantas de vehiculo"
+                            IsEnabled="False"
+                            TextColor="#B5B5B5">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:Int32}">
+                                <x:Int32>4</x:Int32>
+                                <x:Int32>6</x:Int32>
+                                <x:Int32>10</x:Int32>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </Frame>
+                <Frame CornerRadius="15"
+                       BackgroundColor="#F7F6F6"
+                       Padding="10">
+
+                    <Editor x:Name="TxtDatosExtras"
+                            Text="{Binding DatosExtras}"
+                            Placeholder="Datos extras de vehiculo"
+                            FontSize="16"
+                            AutoSize="TextChanges" />
+                </Frame>
+                <Frame CornerRadius="15"
+                       BackgroundColor="#F7F6F6"
+                       Padding="10">
+                    <Entry x:Name="TxtKilomtraje"
+                           Text="{Binding Kilometraje}"
+                           FontSize="16"
+                           Placeholder="Kilometraje recorrido"
+                           Keyboard="Numeric" />
+                </Frame>
+                <Frame CornerRadius="15"
+                       BackgroundColor="#F7F6F6"
+                       Padding="10">
+                    <Entry x:Name="TxtHoraInicial"
+                           Text="{Binding HoraInicial}"
+                           Placeholder="Horas de uso de vehículo"
+                           Keyboard="Numeric"
+                           FontSize="16" />
+                </Frame>
+                <Frame CornerRadius="15"
+                       BackgroundColor="#F7F6F6"
+                       Padding="10">
+                    <Entry x:Name="TxHoraFinal"
+                           Text="{Binding HoraFinal}"
+                           Placeholder="Horas de uso de vehículo"
+                           Keyboard="Numeric"
+                           FontSize="16" />
+                </Frame>
+                <Frame CornerRadius="15"
+                       BackgroundColor="#F7F6F6"
+                       Padding="10">
+                    <Entry x:Name="TxtHoraDeUso"
+                           Text="{Binding HoraDeUso}"
+                           Placeholder="Horas trabajadas de vehículo"
+                           Keyboard="Numeric"
+                           FontSize="16" />
+                </Frame>
+               
+
+                <Frame CornerRadius="15"
+                       BackgroundColor="#F7F6F6"
+                       Padding="10">
+                    <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="Fill">
+                        <Entry x:Name="TxtTiempoVidaLlantas"
+                               Placeholder="Tiempo de vida de llantas"
+                               Text="{Binding TiempoVidaLlantas}"
+                               VerticalOptions="Center"
+                               HorizontalOptions="FillAndExpand"
+                               WidthRequest="300"
+                               FontSize="16"
+                               Keyboard="Numeric" />
+                        <Label Text="%"
+                               FontSize="16"
+                               VerticalOptions="End"
+                               Padding="0,0,0,15"
+                               HorizontalOptions="Start" />
+                    </StackLayout>
+                </Frame>
+                
+                <Frame CornerRadius="15"
+                       BackgroundColor="#F7F6F6"
+                       Padding="10">
+
+                    <Editor x:Name="TxtObservaciones"
+                            Text="{Binding Observaciones}"
+                            Placeholder="Observaciones del vehiculo"
+                            FontSize="16"
+                            AutoSize="TextChanges" />
+                </Frame>
+
+                <Frame CornerRadius="15"
+                       BackgroundColor="#F7F6F6"
+                       Padding="10">
+                    <Editor x:Name="TxtCombustible"
+                            Text="{Binding Combustible}"
+                            Placeholder="Combustible utilizado por el vehiculo"
+                            FontSize="16"
+                            Keyboard="Numeric" />
+                </Frame>
+
+                <Button  Text="Guardar"
+                         x:Name="BttnGuardar"
+                         Command="{Binding EditarDatosCommando}"
+                         VerticalOptions="Center"
+                         FontSize="15"
+                         Grid.Row="3"
+                         Grid.ColumnSpan="3"
+                         FontAttributes="Bold"
+                         Padding="0"
+                         BackgroundColor="#BE5165"
+                         TextColor="White"
+                         CornerRadius="10"
+                         Margin="0,0,0,70" />
+            </StackLayout>
+        </ScrollView>
+
+    </StackLayout>
+</ContentPage>

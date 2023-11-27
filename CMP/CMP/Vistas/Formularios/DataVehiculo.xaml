@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:CMP.VistaModelo.Formularios"
+             x:Class="CMP.Vistas.Formularios.DataVehiculo"
+             NavigationPage.HasNavigationBar="False"
+             Visual="Material"
+             BackgroundColor="White">
+    <StackLayout>
+        <Frame BackgroundColor="#D48593"
+               HorizontalOptions="FillAndExpand"
+               HeightRequest="64"
+               Margin="0"
+               Padding="0,10,0,20"
+               HasShadow="False"
+               CornerRadius="0">
+            <Grid ColumnDefinitions="64">
+                <ImageButton Source="back.png"
+                             BackgroundColor="#D48593"
+                             HorizontalOptions="Start"
+                             Grid.Column="0"
+                             Margin="15,0,0,0"
+                             Command="{Binding NavVehiculoCommand}" />
+                <Label Text="CalMaP"
+                       HorizontalOptions="End"
+                       VerticalOptions="Center"
+                       FontSize="23"
+                       FontAttributes="Bold"
+                       Margin="0,0,40,-10"
+                       TextColor="White"
+                       Grid.Column="1" />
+            </Grid>
+        </Frame>
+        <ScrollView Margin="0,0,0,10">
+            <StackLayout VerticalOptions="Center"
+                         Spacing="20"
+                         Margin="10,0,10,0"
+                         x:Name="DataVehiculoCont">
+                <Label Text="Datos"
+                       FontSize="Title"
+                       HorizontalOptions="Center"
+                       FontAttributes="Bold" />
+                <Frame BackgroundColor="#F0DCE6"
+                       Margin="0,30"
+                       Padding="0,0,0,0"
+                       CornerRadius="250"
+                       HeightRequest="220"
+                       WidthRequest="230"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center">
+                    <Image Source="{Binding Parametrosrecive.Icono}" />
+                </Frame>
+                <Frame  Margin="10,0,10,0"
+                        CornerRadius="15"
+                        BackgroundColor="#F0DCE6"
+                        IsVisible="False">
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="IdVehiculo "
+                               FontAttributes="Bold"
+                               FontSize="Body" />
+                        <Label Text="{Binding Parametrosrecive.IdVehiculo}"
+                               FontSize="Body" />
+                    </StackLayout>
+                </Frame>
+                <Frame  Margin="10,0,10,0"
+                        CornerRadius="15"
+                        BackgroundColor="#F0DCE6">
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Número economico"
+                               FontAttributes="Bold"
+                               FontSize="Body" />
+                        <Label Text="{Binding Parametrosrecive.NumeroEconomico}"
+                               FontSize="Body" />
+                    </StackLayout>
+                </Frame>
+                <Frame  Margin="10,0,10,0"
+                        CornerRadius="15"
+                        BackgroundColor="#F0DCE6">
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Número de serie"
+                               FontAttributes="Bold"
+                               FontSize="Body" />
+                        <Label Text="{Binding Parametrosrecive.NumeroDeSerie}"
+                               FontSize="Body" />
+                    </StackLayout>
+                </Frame>
+                <Frame  Margin="10,0,10,0"
+                        CornerRadius="15"
+                        BackgroundColor="#F0DCE6">
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Nombre"
+                               FontAttributes="Bold"
+                               FontSize="Body" />
+                        <Label Text="{Binding Parametrosrecive.Nombre}"
+                               FontSize="Body" />
+                    </StackLayout>
+                </Frame>
+                <Frame  Margin="10,0,10,0"
+                        CornerRadius="15"
+                        BackgroundColor="#F0DCE6">
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Modelo"
+                               FontAttributes="Bold"
+                               FontSize="Body" />
+                        <Label Text="{Binding Parametrosrecive.Modelo}"
+                               FontSize="Body" />
+                    </StackLayout>
+                </Frame>
+                <Frame  Margin="10,0,10,0"
+                        CornerRadius="15"
+                        BackgroundColor="#F0DCE6">
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Tipo de vehiculo"
+                               FontAttributes="Bold"
+                               FontSize="Body" />
+                        <Label Text="{Binding Parametrosrecive.Tipo}"
+                               FontSize="Body" />
+                    </StackLayout>
+                </Frame>
+                <Frame  Margin="10,0,10,0"
+                        CornerRadius="15"
+                        BackgroundColor="#F0DCE6">
+
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Estado actual"
+                               FontAttributes="Bold"
+                               FontSize="Body" />
+                        <Label Text="{Binding Parametrosrecive.Estado}"
+                               FontSize="Body" />
+                    </StackLayout>
+                </Frame>
+                <Frame  Margin="10,0,10,0"
+                        CornerRadius="15"
+                        BackgroundColor="#F0DCE6">
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Cantidad de rueda de vehiculo"
+                               FontAttributes="Bold"
+                               FontSize="Body" />
+                        <Label Text="{Binding Parametrosrecive.CantLlantas}"
+                               FontSize="Body" />
+                    </StackLayout>
+                </Frame>
+                <Frame  Margin="10,0,10,0"
+                        CornerRadius="15"
+                        BackgroundColor="#F0DCE6">
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Otros datos del vehiculo"
+                               FontAttributes="Bold"
+                               FontSize="Body" />
+                        <Label Text="{Binding Parametrosrecive.DatosExtras}"
+                               FontSize="Body" />
+                    </StackLayout>
+                </Frame>
+                <Frame  Margin="10,0,10,0"
+                        CornerRadius="15"
+                        BackgroundColor="#F0DCE6">
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Kilometros recorridos"
+                               FontAttributes="Bold"
+                               FontSize="Body" />
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding Parametrosrecive.Kilomtraje}"
+                                   FontSize="Body" />
+                            <Label Text=" Km" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Frame  Margin="10,0,10,0"
+                        CornerRadius="15"
+                        BackgroundColor="#F0DCE6">
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Horas totales trabajadas"
+                               FontAttributes="Bold"
+                               FontSize="Body" />
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding Parametrosrecive.HoraDeUso}"
+                                   FontSize="Body" />
+                            <Label Text=" H" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                
+                
+                <Frame  Margin="10,0,10,0"
+                        CornerRadius="15"
+                        BackgroundColor="#F0DCE6">
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="porcentaje de vida de las rueda"
+                               FontAttributes="Bold"
+                               FontSize="Body" />
+
+                        <Grid x:Name="GridPorcentajes"
+                              VerticalOptions="Center"
+                              HorizontalOptions="Fill"
+                              Margin="0,20">
+                            
+                        </Grid>
+                        <Label Text="Selecciona un botón para cambiar el estado actual de este"
+                               FontSize="Micro"/>
+                    </StackLayout>
+                </Frame>
+                
+                
+                <Frame  Margin="10,0,10,0"
+                        CornerRadius="15"
+                        BackgroundColor="#F0DCE6">
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Observaciones"
+                               FontAttributes="Bold"
+                               FontSize="Body" />
+                        <Label Text="{Binding Parametrosrecive.Observaciones}"
+                               FontSize="Body" />
+                    </StackLayout>
+                </Frame>
+
+                <Frame  Margin="10,0,10,0"
+                        CornerRadius="15"
+                        BackgroundColor="#F0DCE6">
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Combustible utilizados"
+                               FontAttributes="Bold"
+                               FontSize="Body" />
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding Parametrosrecive.Combustible}"
+                                   FontSize="Body" />
+                            <Label Text=" L" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Frame  Margin="10,0,10,0"
+                        CornerRadius="15"
+                        BackgroundColor="#F0DCE6">
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Rendimiento mensual"
+                               FontAttributes="Bold"
+                               FontSize="Body" />
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding Parametrosrecive.RendimientoxMes}"
+                                   FontSize="Body" />
+                            <Label Text=" L/M" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Button  Text="Editar"
+                         x:Name="BttnModificar"
+                         Command="{Binding IrAEditarCommando}"
+                         VerticalOptions="Center"
+                         FontSize="15"
+                         Grid.Row="3"
+                         Grid.ColumnSpan="3"
+                         FontAttributes="Bold"
+                         Padding="0"
+                         BackgroundColor="#BE5165"
+                         TextColor="White"
+                         CornerRadius="10" />
+                <Button  Text="Eliminar"
+                         x:Name="BttnEliminar"
+                         Command="{Binding EliminarVehiculoCommand}"
+                         VerticalOptions="Center"
+                         FontSize="15"
+                         Grid.Row="3"
+                         Grid.ColumnSpan="3"
+                         FontAttributes="Bold"
+                         Padding="0"
+                         BackgroundColor="#BE5165"
+                         TextColor="White"
+                         CornerRadius="10"
+                         Margin="0,0,0,70" />
+            </StackLayout>
+
+        </ScrollView>
+
+    </StackLayout>
+</ContentPage>

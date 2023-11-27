@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vistamodelo="clr-namespace:CMP.VistaModelo"
+             xmlns:controls="clr-namespace:XamForms.Controls;assembly=XamForms.Controls.Calendar"
+             xmlns:cmp="clr-namespace:CMP;assembly=CMP"
+             x:DataType="vistamodelo:VMCalendario"
+             x:Class="CMP.Vistas.Calendario"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="White"
+             Visual="Material">
+    
+    <StackLayout Spacing="20">
+        <Frame BackgroundColor="#D48593"
+               HorizontalOptions="FillAndExpand"
+               CornerRadius="0"
+               HeightRequest="64"
+               Margin="0"
+               Padding="0"
+               HasShadow="False">
+            <Grid ColumnDefinitions="64">
+                <ImageButton Source="back.png"
+                             BackgroundColor="#D48593"
+                             HorizontalOptions="Start"
+                             Grid.Column="0"
+                             Margin="15,0,0,0"
+                             Command="{Binding VolverMenuCommand}" />
+                <Label Text="CalMaP"
+                       HorizontalOptions="End"
+                       VerticalOptions="Center"
+                       FontSize="23"
+                       FontAttributes="Bold"
+                       Margin="0,0,40,0"
+                       TextColor="White"
+                       Grid.Column="1" />
+            </Grid>
+        </Frame>
+
+        <Frame Margin="20"
+               CornerRadius="15">
+            <controls:Calendar Padding="10,0,10,0"
+                               BorderColor="White"
+                               BorderWidth="1"
+                               OuterBorderWidth="0"
+                               CellHeight="30"
+                               DisabledBorderColor="Black"
+                               MonthNavigationShow="True"
+                               SelectedBackgroundColor="#D48593"
+                               SelectedBorderColor="#D48593"
+                               SelectedTextColor="Black"
+                               SelectedFontAttributes="Bold"
+                               SelectedBorderWidth="2"
+                               ShouldShowCurrentMonthDates="False"
+                               TitleLabelTextColor="Black"
+                               TitleLeftArrowTextColor="Black"
+                               TitleRightArrowTextColor="Black"
+                               ShowNumberOfWeek="false"
+                               StartDay="Sunday"
+                               WeekdaysTextColor="Black"
+                               WeekdaysFontSize="12"
+                               DatesFontSize="15"
+                               SelectedFontSize="16"
+                               DateCommand="{Binding DateChosenCommand}"
+                               SelectedDate="{Binding Date}"
+                               SpecialDates="{Binding Attendances}"
+                               />
+        </Frame>
+
+    </StackLayout>
+</ContentPage>

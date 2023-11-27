@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CMP.Vistas.Vehiculos"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="White"
+             Visual="Material">
+    <StackLayout>
+        <Frame BackgroundColor="#D48593"
+               HorizontalOptions="FillAndExpand"
+               HeightRequest="64"
+               Margin="0"
+               Padding="0"
+               HasShadow="False"
+               CornerRadius="0">
+            <Label Text="CalMaP"
+                   HorizontalOptions="End"
+                   VerticalOptions="Center"
+                   FontSize="23"
+                   FontAttributes="Bold"
+                   Margin="0,0,40,0"
+                   TextColor="White" />
+        </Frame>
+
+        <Grid RowDefinitions="*">
+            
+
+            <ScrollView>
+                <StackLayout VerticalOptions="Start"
+                             Margin="10,12,10,0"
+                             Orientation="Vertical"
+                             Spacing="20">
+                    <CollectionView x:Name="listaCar"
+                                    ItemsSource="{Binding ListaVehiculos}">
+
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical"
+                                             Span="1"
+                                             VerticalItemSpacing="20" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame CornerRadius="15"
+                                       BackgroundColor="#F0DCE6"
+                                       BorderColor="#EEEDED"
+                                       HasShadow="False">
+                                    <Grid HorizontalOptions="FillAndExpand">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="1,*" />
+                                            <RowDefinition Height="1,*" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50,*" />
+                                            <ColumnDefinition Width="150,*" />
+                                            <ColumnDefinition Width="83,*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Image Source="{Binding Icono}"
+                                               HeightRequest="50"
+                                               WidthRequest="50"
+                                               Margin="0, 0, 6, 0"
+                                               HorizontalOptions="Start"
+                                               Grid.RowSpan="2"
+                                               Grid.Column="0" />
+                                        <Label Text="{Binding NumeroEconomico}"
+                                               HorizontalOptions="StartAndExpand"
+                                               VerticalOptions="Center"
+                                               FontAttributes="Bold"
+                                               Grid.RowSpan="2"
+                                               Grid.Column="1" />
+                                        <Label Text="{Binding Kilomtraje}"
+                                               HorizontalOptions="End"
+                                               VerticalOptions="Center"
+                                               FontSize="15"
+                                               Grid.Row="0"
+                                               Grid.Column="2" />
+                                        <Label Text="{Binding Estado}"
+                                               HorizontalOptions="End"
+                                               VerticalOptions="Center"
+                                               FontSize="15"
+                                               Grid.Row="1"
+                                               Grid.Column="2"
+                                               TextColor="{Binding ColorCommand}" />
+                                    </Grid>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding 
+                                                              Path = BindingContext.NavDataVehiculoCommand,
+                                                              Source={x:Reference listaCar}}"
+                                                              CommandParameter="{Binding .}" />
+                                    </Frame.GestureRecognizers>
+                                </Frame>
+                                
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                        
+                    </CollectionView>
+                </StackLayout>
+            </ScrollView>
+
+            <ImageButton Source="plus.png"
+                         VerticalOptions="EndAndExpand"
+                         HorizontalOptions="EndAndExpand"
+                         HeightRequest="60"
+                         WidthRequest="60"
+                         Margin="0,0,30,30"
+                         CornerRadius="100"
+                         BackgroundColor="White"
+                         Command="{Binding NavAddVehiculoCommand}" />
+        </Grid>
+
+    </StackLayout>
+</ContentPage>
