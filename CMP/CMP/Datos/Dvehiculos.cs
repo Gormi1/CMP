@@ -96,18 +96,21 @@ namespace CMP.Datos
                 {
                     IdVehiculo = Item.Key,
                     NumeroEconomico = Item.Object.NumeroEconomico,
-                    Modelo = Item.Object.Modelo,
-                    Nombre = Item.Object.Nombre,
-                    Tipo = Item.Object.Tipo,
                     NumeroDeSerie = Item.Object.NumeroDeSerie,
-                    Icono = Item.Object.Tipo == "pesado" ? "BttnTruck.png" : "BttnCar.png",
-                    Kilomtraje = Item.Object.Kilomtraje,
-                    HoraDeUso = Item.Object.HoraDeUso,
+                    Nombre = Item.Object.Nombre,
+                    Modelo = Item.Object.Modelo,
+                    Tipo = Item.Object.Tipo,
+                    Estado = Item.Object.Estado,
                     CantLlantas = Item.Object.CantLlantas,
                     TiempoVidaLlantas = Item.Object.TiempoVidaLlantas,
+                    Kilomtraje = Item.Object.Kilomtraje,
+                    HoraInicial = Item.Object.HoraInicial,
+                    HoraFinal = Item.Object.HoraFinal,
+                    HoraDeUso = Item.Object.HoraDeUso,
                     DatosExtras = Item.Object.DatosExtras,
                     Observaciones = Item.Object.Observaciones,
-                    Estado = Item.Object.Estado,
+                    Combustible = Item.Object.Combustible,
+                    RendimientoxMes = Item.Object.RendimientoxMes,
                 }).ToList();
         }
         public async Task EditarVehiculo(MVehiculos parametro)

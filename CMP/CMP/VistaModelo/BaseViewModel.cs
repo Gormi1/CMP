@@ -52,12 +52,17 @@ namespace CMP.VistaModelo
             await Application.Current.MainPage.DisplayAlert(title, message, cancel);
         }
 
+
         //2 btns
         public async Task<bool> DisplayAlert(string title, string message, string accept, string cancel)
         {
             return await Application.Current.MainPage.DisplayAlert(title, message, accept, cancel);
         }
 
+        public async Task<string> DisplayPromptAsync(string title, string message, string accept, string cancel, string placeholder)
+        {
+            return await Application.Current.MainPage.DisplayPromptAsync(title, message, accept, cancel, placeholder);
+        }
         //manejar un string o un entry
         protected bool SetProperty<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
