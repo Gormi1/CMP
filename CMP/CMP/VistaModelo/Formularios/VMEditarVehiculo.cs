@@ -58,7 +58,6 @@ namespace CMP.VistaModelo.Formularios
                 Tipo = Tipo,
                 Estado = Estado,
                 CantLlantas = CantLlantas,
-                TiempoVidaLlantas = new List<int>(new int[CantLlantas]),
                 Kilomtraje = Kilometraje,
                 HoraInicial = HoraInicial,
                 HoraFinal = HoraFinal,

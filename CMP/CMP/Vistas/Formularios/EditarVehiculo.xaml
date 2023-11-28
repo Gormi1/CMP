@@ -36,6 +36,7 @@
             <StackLayout VerticalOptions="Center"
                          Spacing="20"
                          Margin="10,0,10,0">
+                
                 <Entry x:Name="TxtIdVehiculo"
                        Placeholder="IdVehiculo"
                        Text="{Binding IdVehiculo}"
@@ -48,7 +49,46 @@
                        HorizontalOptions="Center"
                        FontSize="Large"
                        Margin="0,10,0,10" />
+                <Grid VerticalOptions="Center"
+                      HorizontalOptions="Center">
+                    <Frame BackgroundColor="#D48593"
+                           Margin="0,30"
+                           Padding="3"
+                           CornerRadius="250"
+                           HeightRequest="220"
+                           WidthRequest="230"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center">
+                        <Frame BackgroundColor="#F0DCE6"
+                               Padding="0,0,0,0"
+                               CornerRadius="250"
+                               HeightRequest="230"
+                               WidthRequest="230"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                               BorderColor="#D48593">
+                            <Image Source="{Binding Imagen}" />
+                        </Frame>
+                    </Frame>
 
+                    <Frame HorizontalOptions="End"
+                           VerticalOptions="End"
+                           Margin="60,30"
+                           BackgroundColor="#D48593"
+                           CornerRadius="60"
+                           HeightRequest="76"
+                           WidthRequest="76"
+                           Padding="4">
+                        <ImageButton Source="pencil.png"
+                                     BackgroundColor="#E8B5C4"
+                                     BorderColor="#D48593"
+                                     CornerRadius="60"
+                                     HeightRequest="80"
+                                     WidthRequest="80"
+                                     Padding="13" />
+                    </Frame>
+
+                </Grid>
                 <Frame CornerRadius="15"
                        Padding="10"
                        BackgroundColor="#F7F6F6">
@@ -164,7 +204,7 @@
                        Padding="10">
                     <Entry x:Name="TxtHoraInicial"
                            Text="{Binding HoraInicial}"
-                           Placeholder="Horas de uso de vehículo"
+                           Placeholder="Horas iniciales de uso"
                            Keyboard="Numeric"
                            FontSize="16" />
                 </Frame>
@@ -173,42 +213,11 @@
                        Padding="10">
                     <Entry x:Name="TxHoraFinal"
                            Text="{Binding HoraFinal}"
-                           Placeholder="Horas de uso de vehículo"
+                           Placeholder="Horas finales de uso"
                            Keyboard="Numeric"
                            FontSize="16" />
                 </Frame>
-                <Frame CornerRadius="15"
-                       BackgroundColor="#F7F6F6"
-                       Padding="10">
-                    <Entry x:Name="TxtHoraDeUso"
-                           Text="{Binding HoraDeUso}"
-                           Placeholder="Horas trabajadas de vehículo"
-                           Keyboard="Numeric"
-                           FontSize="16" />
-                </Frame>
-               
-
-                <Frame CornerRadius="15"
-                       BackgroundColor="#F7F6F6"
-                       Padding="10">
-                    <StackLayout Orientation="Horizontal"
-                                 HorizontalOptions="Fill">
-                        <Entry x:Name="TxtTiempoVidaLlantas"
-                               Placeholder="Tiempo de vida de llantas"
-                               Text="{Binding TiempoVidaLlantas}"
-                               VerticalOptions="Center"
-                               HorizontalOptions="FillAndExpand"
-                               WidthRequest="300"
-                               FontSize="16"
-                               Keyboard="Numeric" />
-                        <Label Text="%"
-                               FontSize="16"
-                               VerticalOptions="End"
-                               Padding="0,0,0,15"
-                               HorizontalOptions="Start" />
-                    </StackLayout>
-                </Frame>
-                
+                                
                 <Frame CornerRadius="15"
                        BackgroundColor="#F7F6F6"
                        Padding="10">

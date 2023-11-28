@@ -73,7 +73,7 @@ namespace CMP.VistaModelo.Formularios
                     }
                     else if (PorcentajesRuedas[i] > 33 && PorcentajesRuedas[i] <= 66)
                     {
-                        color = "#FFD53D";
+                        color = "#D49E3D";
                     }
                     else if (PorcentajesRuedas[i] > 67)
                     {
@@ -83,7 +83,7 @@ namespace CMP.VistaModelo.Formularios
                     Button Rueda = new Button
                     {
                         Text = $"Rueda {i + 1}: {PorcentajesRuedas[i]}%",
-                        FontSize = 15,
+                        FontSize = 12,
                         FontAttributes = FontAttributes.None,
                         VerticalOptions = LayoutOptions.FillAndExpand,
                         HorizontalOptions = LayoutOptions.FillAndExpand,
@@ -107,7 +107,11 @@ namespace CMP.VistaModelo.Formularios
         {
             string nuevoPorcentaje = await DisplayPromptAsync("Cambiar Porcentaje", $"Nuevo porcentaje para Rueda {indiceRueda}:", "OK", "Cancelar", "0-100");
 
-            
+            if (nuevoPorcentaje == null) 
+            {
+                return;
+            }
+
             if (string.IsNullOrWhiteSpace(nuevoPorcentaje))
             {
                 await DisplayAlert("Error", "Debes ingresar un valor válido.", "OK");
@@ -116,13 +120,10 @@ namespace CMP.VistaModelo.Formularios
 
             if (int.TryParse(nuevoPorcentaje, out int porcentaje)) 
             {
-                // Validar que el nuevo porcentaje esté en el rango de 0 a 100
                 if (porcentaje >= 0 && porcentaje <= 100)
                 {
-                    // Actualizar el porcentaje en la lista
                     PorcentajesRuedas[indiceRueda] = porcentaje;
 
-                    // Volver a dibujar el grid con los nuevos porcentajes
                     DibujarPorcentajesRuedas(parametro);
 
                     await EditarRuedas();
@@ -131,7 +132,6 @@ namespace CMP.VistaModelo.Formularios
                 {
                     await DisplayAlert("Error", "El porcentaje debe estar entre 0 y 100.", "OK");
                 }
-                
             }
             else
             {

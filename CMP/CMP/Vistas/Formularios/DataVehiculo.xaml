@@ -195,7 +195,7 @@
                               Margin="0,20">
                             
                         </Grid>
-                        <Label Text="Selecciona un botón para cambiar el estado actual de este"
+                        <Label Text="Selecciona una Rueda para cambiar el porcentaje de vida de esta"
                                FontSize="Micro"/>
                     </StackLayout>
                 </Frame>
