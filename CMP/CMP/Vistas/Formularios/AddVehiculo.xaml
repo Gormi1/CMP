@@ -35,7 +35,7 @@
         <ScrollView Margin="0,0,0,10">
             <StackLayout VerticalOptions="Center"
                          Spacing="20"
-                         Margin="10,0,10,0">
+                         Margin="20,0,20,0">
                 <Label Text="Agregar Vehiculo"
                        HorizontalOptions="Center"
                        FontSize="Large"
@@ -183,40 +183,41 @@
                 <Frame CornerRadius="15"
                        BackgroundColor="#F7F6F6"
                        Padding="10">
-                    <Entry x:Name="TxtKilomtraje"
-                           Text="{Binding Kilometraje}"
-                           FontSize="16"
-                           Placeholder="Kilometraje recorrido"
-                           Keyboard="Numeric" />
-                </Frame>
-                <Frame CornerRadius="15"
-                       BackgroundColor="#F7F6F6"
-                       Padding="10">
-                    <Entry x:Name="TxtHoraInicial"
-                           Text="{Binding HoraInicial}"
-                           Placeholder="Horas iniciales de vehículo"
-                           Keyboard="Numeric"
-                           FontSize="16" />
-                </Frame>
-                <Frame CornerRadius="15"
-                       BackgroundColor="#F7F6F6"
-                       Padding="10">
-                    <Entry x:Name="TxHoraFinal"
-                           Text="{Binding HoraFinal}"
-                           Placeholder="Horas Finales de vehículo"
-                           Keyboard="Numeric"
-                           FontSize="16" />
-                </Frame>
+                    <StackLayout Orientation="Horizontal"
+                                 VerticalOptions="FillAndExpand"
+                                 HorizontalOptions="FillAndExpand">
 
+                        <Entry x:Name="TxtKilomtraje"
+                               Text="{Binding Kilometraje}"
+                               FontSize="16"
+                               Placeholder="Kilometraje recorrido"
+                               Keyboard="Numeric"
+                               VerticalOptions="FillAndExpand"
+                               HorizontalOptions="FillAndExpand" />
+                        <Label Text="KM"
+                               VerticalOptions="End"
+                               FontSize="16"
+                               FontAttributes="Bold" />
+                    </StackLayout>
+                </Frame>
                 <Frame CornerRadius="15"
                        BackgroundColor="#F7F6F6"
                        Padding="10">
-                    <Editor x:Name="TxtCombustible"
-                            Text="{Binding Combustible}"
-                            Placeholder="Combustible cargado por el vehiculo"
-                            FontSize="16"
-                            Keyboard="Numeric"
-                            HorizontalOptions="FillAndExpand" />
+                    <StackLayout Orientation="Horizontal"
+                                 VerticalOptions="FillAndExpand"
+                                 HorizontalOptions="FillAndExpand">
+                        <Editor x:Name="TxtCombustible"
+                                Text="{Binding Combustible}"
+                                Placeholder="Combustible cargado en el día"
+                                FontSize="16"
+                                Keyboard="Numeric"
+                                VerticalOptions="FillAndExpand"
+                                HorizontalOptions="FillAndExpand" />
+                        <Label Text="L"
+                               VerticalOptions="End"
+                               FontSize="16"
+                               FontAttributes="Bold" />
+                    </StackLayout>
                 </Frame>
                 <Button  Text="Guardar"
                          x:Name="BttnGuardar"
