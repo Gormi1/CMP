@@ -46,6 +46,8 @@ namespace CMP.Datos
 
         public async Task InsertarVehiculo(MVehiculos parametro)
         {
+            parametro.HoraInicial = 0;
+            parametro.HoraFinal = 0;
             int res = parametro.HoraFinal - parametro.HoraInicial;
             parametro.HoraDeUso = res;
             double Rendimiento = parametro.Combustible/res;
@@ -115,6 +117,7 @@ namespace CMP.Datos
         }
         public async Task EditarVehiculo(MVehiculos parametro)
         {
+            
             //se busca al item
             var data = (await ConexionFirebase.FBCliente
                 .Child("Servicios")
@@ -141,7 +144,11 @@ namespace CMP.Datos
                     TiempoVidaLlantas = parametro.TiempoVidaLlantas,
                     DatosExtras = parametro.DatosExtras,
                     Observaciones = parametro.Observaciones,
-                    Estado = parametro.Estado
+                    Estado = parametro.Estado,                     
+                    HoraInicial = parametro.HoraInicial,
+                    HoraFinal = parametro.HoraFinal,                   
+                    Combustible = parametro.Combustible,
+                    RendimientoxMes = parametro.RendimientoxMes,
                 });
         }
         public async Task EliminarVehiculo(MVehiculos parametro)

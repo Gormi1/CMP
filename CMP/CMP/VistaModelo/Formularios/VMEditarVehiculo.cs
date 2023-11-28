@@ -48,28 +48,23 @@ namespace CMP.VistaModelo.Formularios
         public async Task EditarVehiculo()
         {
             var funcion = new Dvehiculos();
-            Parametrosrecive = new MVehiculos
-            {
-                IdVehiculo = IdVehiculo,
-                NumeroEconomico = NumeroEconomico,
-                NumeroDeSerie = NumeroDeSerie,
-                Nombre = Nombre,
-                Modelo = Modelo,
-                Tipo = Tipo,
-                Estado = Estado,
-                CantLlantas = CantLlantas,
-                Kilomtraje = Kilometraje,
-                HoraInicial = HoraInicial,
-                HoraFinal = HoraFinal,
-                DatosExtras = DatosExtras,
-                Observaciones = Observaciones,
-                Combustible = Combustible,
-            };
+
+            Parametrosrecive.Estado = Estado;
+            Parametrosrecive.DatosExtras = DatosExtras;
+            Parametrosrecive.Observaciones = Observaciones;
+            Parametrosrecive.HoraInicial += HoraFinal;
+            Parametrosrecive.HoraFinal = HoraFinal;
+            Parametrosrecive.Kilomtraje += Kilometraje;
+            Parametrosrecive.Combustible += Combustible;
+            int res = Parametrosrecive.HoraInicial - Parametrosrecive.HoraFinal;
+            Parametrosrecive.HoraDeUso += Parametrosrecive.HoraInicial;
+            double Rendimiento = Parametrosrecive.Combustible / res;
+            Parametrosrecive.RendimientoxMes = Rendimiento;
 
             await funcion.EditarVehiculo(Parametrosrecive);
             await DisplayAlert("Vehiculo Guardado", "Datos guardados Correctamente", "Aceptar");
             VaciarCampos();
-            await RegresarAVehiculos();
+            await RegresaraMenu();
         }
         public void LlenarCampos()
         {
@@ -79,11 +74,10 @@ namespace CMP.VistaModelo.Formularios
             Nombre = Parametrosrecive.Nombre;
             Tipo = Parametrosrecive.Tipo;
             NumeroDeSerie = Parametrosrecive.NumeroDeSerie;
-            Kilometraje = Parametrosrecive.Kilomtraje;
             CantLlantas = Parametrosrecive.CantLlantas;
             DatosExtras = Parametrosrecive.DatosExtras;
             Observaciones = Parametrosrecive.Observaciones;
-            Estado = Parametrosrecive.Estado; 
+            Estado = Parametrosrecive.Estado;
         }
         public void VaciarCampos()
         {
@@ -98,6 +92,13 @@ namespace CMP.VistaModelo.Formularios
             DatosExtras = "";
             Observaciones = "";
             Estado = "";
+            HoraInicial = 0;
+            HoraFinal = 0;
+            Combustible = 0;
+        }
+        public async Task RegresaraMenu()
+        {
+            await Navigation.PopToRootAsync();
         }
         public async Task RegresarAVehiculos()
         {
@@ -107,7 +108,8 @@ namespace CMP.VistaModelo.Formularios
 
         #region COMANDOS
 
-        public ICommand VolverMenuCommand => new Command(async () => await RegresarAVehiculos());
+        public ICommand VolverdetallesCommand => new Command(async () => await RegresarAVehiculos());
+        public ICommand VolverMenuCommand => new Command(async () => await RegresaraMenu());
         public ICommand EditarDatosCommando => new Command(async () => await EditarVehiculo());
         #endregion
     }

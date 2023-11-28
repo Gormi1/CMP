@@ -141,6 +141,7 @@ namespace CMP.VistaModelo.Formularios
         public async Task EditarRuedas()
         {
             var funcion = new Dvehiculos();
+
             Parametrosrecive.TiempoVidaLlantas = new List<int>(PorcentajesRuedas);
 
             await funcion.EditarVehiculo(Parametrosrecive);
