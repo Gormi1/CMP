@@ -65,6 +65,7 @@ namespace CMP.VistaModelo.Formularios
             {
                 for (int i = 0; i < PorcentajesRuedas.Count; i++)
                 {
+                    int indice = i;
 
                     if (PorcentajesRuedas[i] <= 33)
                     {
@@ -92,13 +93,60 @@ namespace CMP.VistaModelo.Formularios
                         
                     };
 
+                    Rueda.Clicked += (sender, args) => CambiarPorcentajeRuedaClick(indice, GridPorcentajes);
+
+
                     GridPorcentajes.Children.Add(Rueda,i%2, i/2);
                     
                 }
             }
 
         }
-       
+
+        private async void CambiarPorcentajeRuedaClick(int indiceRueda, Grid parametro)
+        {
+            string nuevoPorcentaje = await DisplayPromptAsync("Cambiar Porcentaje", $"Nuevo porcentaje para Rueda {indiceRueda}:", "OK", "Cancelar", "0-100");
+
+            
+            if (string.IsNullOrWhiteSpace(nuevoPorcentaje))
+            {
+                await DisplayAlert("Error", "Debes ingresar un valor válido.", "OK");
+                return;
+            }
+
+            if (int.TryParse(nuevoPorcentaje, out int porcentaje)) 
+            {
+                // Validar que el nuevo porcentaje esté en el rango de 0 a 100
+                if (porcentaje >= 0 && porcentaje <= 100)
+                {
+                    // Actualizar el porcentaje en la lista
+                    PorcentajesRuedas[indiceRueda] = porcentaje;
+
+                    // Volver a dibujar el grid con los nuevos porcentajes
+                    DibujarPorcentajesRuedas(parametro);
+
+                    await EditarRuedas();
+                }
+                else
+                {
+                    await DisplayAlert("Error", "El porcentaje debe estar entre 0 y 100.", "OK");
+                }
+                
+            }
+            else
+            {
+                await DisplayAlert("Error", "Debes ingresar un número válido.", "OK");
+            }
+        }
+        public async Task EditarRuedas()
+        {
+            var funcion = new Dvehiculos();
+            Parametrosrecive.TiempoVidaLlantas = new List<int>(PorcentajesRuedas);
+
+            await funcion.EditarVehiculo(Parametrosrecive);
+            await DisplayAlert("Vehiculo Guardado", "Datos guardados Correctamente", "Aceptar");
+        }
+
         #endregion
 
         #region COMANDOS

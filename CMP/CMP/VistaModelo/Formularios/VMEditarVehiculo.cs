@@ -19,12 +19,13 @@ namespace CMP.VistaModelo.Formularios
         public string Tipo { get; set; }
         public string NumeroDeSerie { get; set; }
         public int Kilometraje { get; set; }
-        public int HoraDeUso { get; set; }
+        public int HoraInicial { get; set; }
+        public int HoraFinal { get; set; }
         public int CantLlantas { get; set; }
-        public int TiempoVidaLlantas { get; set; }
         public string DatosExtras { get; set; }
         public string Observaciones { get; set; }
         public string Estado { get; set; }
+        public double Combustible { get; set; }
         public MVehiculos Parametrosrecive { get; set; }
         #endregion
 
@@ -51,17 +52,19 @@ namespace CMP.VistaModelo.Formularios
             {
                 IdVehiculo = IdVehiculo,
                 NumeroEconomico = NumeroEconomico,
-                Modelo = Modelo,
-                Nombre = Nombre,
-                Tipo = Tipo,
                 NumeroDeSerie = NumeroDeSerie,
-                Kilomtraje = Kilometraje,
-                HoraDeUso = HoraDeUso,
+                Nombre = Nombre,
+                Modelo = Modelo,
+                Tipo = Tipo,
+                Estado = Estado,
                 CantLlantas = CantLlantas,
                 TiempoVidaLlantas = new List<int>(new int[CantLlantas]),
+                Kilomtraje = Kilometraje,
+                HoraInicial = HoraInicial,
+                HoraFinal = HoraFinal,
                 DatosExtras = DatosExtras,
                 Observaciones = Observaciones,
-                Estado = Estado
+                Combustible = Combustible,
             };
 
             await funcion.EditarVehiculo(Parametrosrecive);
@@ -78,9 +81,7 @@ namespace CMP.VistaModelo.Formularios
             Tipo = Parametrosrecive.Tipo;
             NumeroDeSerie = Parametrosrecive.NumeroDeSerie;
             Kilometraje = Parametrosrecive.Kilomtraje;
-            HoraDeUso = Parametrosrecive.HoraDeUso;
             CantLlantas = Parametrosrecive.CantLlantas;
-            //TiempoVidaLlantas = Parametrosrecive.TiempoVidaLlantas;
             DatosExtras = Parametrosrecive.DatosExtras;
             Observaciones = Parametrosrecive.Observaciones;
             Estado = Parametrosrecive.Estado; 
@@ -94,9 +95,7 @@ namespace CMP.VistaModelo.Formularios
             Tipo = "";
             NumeroDeSerie = "";
             Kilometraje = 0;
-            HoraDeUso = 0;
             CantLlantas = 0;
-            TiempoVidaLlantas = 0;
             DatosExtras = "";
             Observaciones = "";
             Estado = "";
