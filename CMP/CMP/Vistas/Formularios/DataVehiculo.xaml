@@ -48,7 +48,7 @@
                        WidthRequest="230"
                        VerticalOptions="Center"
                        HorizontalOptions="Center">
-                    <Image Source="{Binding Parametrosrecive.Icono}" />
+                    <Image Source="{Binding Imagen}" />
                 </Frame>
                 <Frame  Margin="10,0,10,0"
                         CornerRadius="15"

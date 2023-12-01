@@ -5,11 +5,14 @@ using CMP.Vistas;
 using CMP.Vistas.Formularios;
 using Firebase.Database;
 using Firebase.Database.Query;
+using Firebase.Storage;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace CMP.VistaModelo.Formularios
@@ -29,8 +32,10 @@ namespace CMP.VistaModelo.Formularios
         public string DatosExtras { get; set; }
         public string Observaciones { get; set; }
         public string Estado { get; set; }
-        public double Combustible {  get; set; }
+        public double Combustible { get; set; }
 
+        private ICommand _pickPhotoCommand;
+        private ImageSource _Selectedphoto;
         #endregion
 
         #region CONSTRUCTOR
@@ -38,16 +43,25 @@ namespace CMP.VistaModelo.Formularios
         {
             Navigation = navigation;
         }
-
-
         #endregion
 
         #region OBJETOS
-
+        public ImageSource Selectedphoto
+        {
+            get { return _Selectedphoto; }
+            set
+            {
+                if (_Selectedphoto != value)
+                {
+                    _Selectedphoto = value;
+                    OnPropertyChanged(nameof(Selectedphoto));
+                }
+            }
+        }
         #endregion
 
         #region PROCESOS
-        //procesos en 2ndo plano
+
         public async Task InsertarVehiculo()
         {
             if (string.IsNullOrEmpty(NumeroEconomico) ||
@@ -76,19 +90,77 @@ namespace CMP.VistaModelo.Formularios
                     Tipo = Tipo,
                     Estado = Estado,
                     CantLlantas = CantLlantas,
-                    TiempoVidaLlantas = new List<int>(new int[CantLlantas]),                   
+                    TiempoVidaLlantas = new List<int>(new int[CantLlantas]),
                     Kilomtraje = Kilometraje,
                     HoraInicial = HoraInicial,
                     HoraFinal = HoraFinal,
                     DatosExtras = DatosExtras,
                     Observaciones = Observaciones,
                     Combustible = Combustible,
+                    Icono = Selectedphoto?.ToString(),
                 };
 
                 await funcion.InsertarVehiculo(datos);
                 await DisplayAlert("Vehiculo Guardado", "Datos guardados Correctamente", "Aceptar");
                 VaciarCampos();
                 await RegresarAVehiculos();
+            }
+        }
+
+        private async Task<string> SubirFotoFirebase()
+        {
+            try
+            {
+                var Foto = await MediaPicker.PickPhotoAsync();
+
+                if (Foto != null)
+                {
+                    using (var stream = await Foto.OpenReadAsync())
+                    {
+                        byte[] fileBytes = new byte[stream.Length];
+                        await stream.ReadAsync(fileBytes, 0, fileBytes.Length);
+
+                        var firebaseStorage = new FirebaseStorage("cmpsoft-260301.appspot.com").Child("vehiculos");
+
+                        // Genera un nombre único para el archivo en Firebase Storage
+                        var fileName = Guid.NewGuid().ToString() + Path.GetExtension(Foto.FullPath);
+
+                        // Sube la foto al bucket de Firebase Storage
+                        var task = firebaseStorage
+                            .Child(fileName)
+                            .PutAsync(new MemoryStream(fileBytes));
+
+                        Console.WriteLine("Subiendo foto...");
+
+                        try
+                        {
+                            var link = await task; 
+                            await DisplayAlert("titulo", "Foto subida correctamente.", "ok");
+                            Console.WriteLine($"Enlace: {link}");
+
+                            Selectedphoto = ImageSource.FromUri(new Uri(link));
+                            return link;
+                        }
+                        catch (Exception ex)
+                        {
+
+                            await DisplayAlert("titulo", $"Error al subir la foto: {ex.Message}", "ok");
+                            return null;
+                        }
+
+                        
+                    }
+                }
+                else
+                {
+                    await DisplayAlert("titulo", "Error al subir la foto", "ok");
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("titulo", $"Error al seleccionar la foto: \n{ex.Message}", "ok");
+                return null;
             }
         }
 
@@ -112,6 +184,8 @@ namespace CMP.VistaModelo.Formularios
         #region COMANDOS
         public ICommand VolverMenuCommand => new Command(async () => await RegresarAVehiculos());
         public ICommand GuardarDatosCommando => new Command(async () => await InsertarVehiculo());
+        public ICommand AgregarImgCommand => _pickPhotoCommand ?? (_pickPhotoCommand = new Command(async () => await SubirFotoFirebase()));
+
         #endregion
     }
 }

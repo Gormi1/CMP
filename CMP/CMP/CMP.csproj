@@ -18,6 +18,7 @@
   <ItemGroup>
     <PackageReference Include="FirebaseDatabase.net" Version="4.2.0" />
     <PackageReference Include="FirebaseStorage.net" Version="1.0.3" />
+    <PackageReference Include="Xam.Plugin.Media" Version="6.0.2" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2622" />
     <PackageReference Include="Xamarin.Essentials" Version="1.8.0" />
     <PackageReference Include="XamForms.Controls.Calendar" Version="1.1.1" />

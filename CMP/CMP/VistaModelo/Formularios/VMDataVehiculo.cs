@@ -1,12 +1,18 @@
 ﻿using CMP.Datos;
 using CMP.Modelo;
 using CMP.Vistas.Formularios;
+using Firebase.Storage;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using Firebase.Database.Query;
+using System.IO;
+using System.Net.Http;
+using CMP.Servicios;
+using System.Net;
 
 namespace CMP.VistaModelo.Formularios
 {
@@ -14,8 +20,9 @@ namespace CMP.VistaModelo.Formularios
     {
         #region VARIABLES
 
-        public MVehiculos Parametrosrecive {  get; set; }
-        public List<int> PorcentajesRuedas {  get; set; }
+        public ImageSource _imagen;
+        public MVehiculos Parametrosrecive { get; set; }
+        public List<int> PorcentajesRuedas { get; set; }
         #endregion
 
         #region CONSTRUCTOR
@@ -25,13 +32,41 @@ namespace CMP.VistaModelo.Formularios
             Parametrosrecive = parametrotrae;
             PorcentajesRuedas = Parametrosrecive.TiempoVidaLlantas;
             DibujarPorcentajesRuedas(parametro);
+            CargarImagen(parametrotrae.Icono);
         }
         #endregion
 
         #region OBJETOS
+        public ImageSource Imagen
+        {
+            get { return _imagen; }
+            set
+            {
+                if (_imagen != value)
+                {
+                    _imagen = value;
+                    OnPropertyChanged(nameof(Imagen));
+                }
+            }
+        }
         #endregion
 
         #region PROCESOS
+        private async Task<ImageSource> CargarImagen(string urlimagen)
+        {
+            var webClient = new WebClient();
+            var nombreArchivo = Path.GetFileName(urlimagen);
+
+            var urlDescarga = await new FirebaseStorage("cmpsoft-260301.appspot.com")
+                    .Child(nombreArchivo)
+                    .GetDownloadUrlAsync();
+
+            string url = urlDescarga;
+            byte[] imgBytes = webClient.DownloadData(url);
+            Imagen = ImageSource.FromStream(() => new MemoryStream(imgBytes));
+            return Imagen;
+
+        }
 
         public async Task IrAEditar()
         {
@@ -47,7 +82,7 @@ namespace CMP.VistaModelo.Formularios
             if (response)
             {
                 var funcion = new Dvehiculos();
-                await funcion.EliminarVehiculo(Parametrosrecive); 
+                await funcion.EliminarVehiculo(Parametrosrecive);
             }
             else
             {
@@ -56,8 +91,8 @@ namespace CMP.VistaModelo.Formularios
             await DisplayAlert("Eliminar", "Vehiculo eliminado correctamente", "ok");
             await RegresarVehiculo();
         }
-        
-        public void DibujarPorcentajesRuedas (Grid GridPorcentajes)
+
+        public void DibujarPorcentajesRuedas(Grid GridPorcentajes)
         {
             GridPorcentajes.Children.Clear();
             string color = "";
@@ -90,14 +125,14 @@ namespace CMP.VistaModelo.Formularios
                         BackgroundColor = Color.FromHex(color),
                         TextColor = Color.White,
                         CornerRadius = 10,
-                        
+
                     };
 
                     Rueda.Clicked += (sender, args) => CambiarPorcentajeRuedaClick(indice, GridPorcentajes);
 
 
-                    GridPorcentajes.Children.Add(Rueda,i%2, i/2);
-                    
+                    GridPorcentajes.Children.Add(Rueda, i % 2, i / 2);
+
                 }
             }
 
@@ -107,7 +142,7 @@ namespace CMP.VistaModelo.Formularios
         {
             string nuevoPorcentaje = await DisplayPromptAsync("Cambiar Porcentaje", $"Nuevo porcentaje para Rueda {indiceRueda}:", "OK", "Cancelar", "0-100");
 
-            if (nuevoPorcentaje == null) 
+            if (nuevoPorcentaje == null)
             {
                 return;
             }
@@ -118,7 +153,7 @@ namespace CMP.VistaModelo.Formularios
                 return;
             }
 
-            if (int.TryParse(nuevoPorcentaje, out int porcentaje)) 
+            if (int.TryParse(nuevoPorcentaje, out int porcentaje))
             {
                 if (porcentaje >= 0 && porcentaje <= 100)
                 {

@@ -84,9 +84,9 @@
                                     </Grid>
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding 
-                                                              Path = BindingContext.NavDataVehiculoCommand,
-                                                              Source={x:Reference listaCar}}"
-                                                              CommandParameter="{Binding .}" />
+                                            Path = BindingContext.NavDataVehiculoCommand,
+                                            Source={x:Reference listaCar}}"
+                                            CommandParameter="{Binding .}" />
                                     </Frame.GestureRecognizers>
                                 </Frame>
                                 

@@ -58,7 +58,7 @@
                                VerticalOptions="Center"
                                HorizontalOptions="Center"
                                BorderColor="#D48593">
-                            <Image Source="{Binding Imagen}" />
+                            <Image Source="{Binding Selectedphoto}" />
                         </Frame>
                     </Frame>
 
@@ -76,7 +76,8 @@
                                      CornerRadius="60"
                                      HeightRequest="80"
                                      WidthRequest="80"
-                                     Padding="13" />
+                                     Padding="13"
+                                     Command="{Binding AgregarImgCommand}" />
                     </Frame>
 
                 </Grid>
