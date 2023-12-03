@@ -2,7 +2,6 @@
 using CMP.Modelo;
 using CMP.Servicios;
 using CMP.VistaModelo.Formularios;
-using CMP.Vistas;
 using CMP.Vistas.Formularios;
 using Firebase.Database.Query;
 using System;
@@ -27,7 +26,7 @@ namespace CMP.VistaModelo
         public string Estado { get; set; }
 
         #endregion
-        
+
         #region CONSTRUCTOR
         public VMVehiculos(INavigation navigation)
         {
@@ -167,7 +166,7 @@ namespace CMP.VistaModelo
                 Kilomtraje = Kilomtraje,
                 Estado = Estado,
             };
-                    
+
             ListaVehiculos = await funcion.ObtenerVehiculos();
         }
         public async Task IraAddVehiculo()
@@ -182,8 +181,8 @@ namespace CMP.VistaModelo
 
 
         #region COMANDOS
-        public ICommand NavAddVehiculoCommand => new Command(async () => await IraAddVehiculo()); 
-        public ICommand NavDataVehiculoCommand => new Command<MVehiculos>(async (p) => await IraDataVehiculo(p)); 
+        public ICommand NavAddVehiculoCommand => new Command(async () => await IraAddVehiculo());
+        public ICommand NavDataVehiculoCommand => new Command<MVehiculos>(async (p) => await IraDataVehiculo(p));
         public ICommand ColorCommand => new Command<MVehiculos>((p) => Color(p.Estado));
         #endregion
     }
