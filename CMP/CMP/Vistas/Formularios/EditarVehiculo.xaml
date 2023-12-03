@@ -20,7 +20,7 @@
                              HorizontalOptions="Start"
                              Grid.Column="0"
                              Margin="15,0,0,0"
-                             Command="{Binding VolverMenuCommand}" />
+                             Command="{Binding VolverdetallesCommand}" />
                 <Label Text="CalMaP"
                        HorizontalOptions="End"
                        VerticalOptions="Center"
@@ -35,7 +35,8 @@
         <ScrollView Margin="0,0,0,10">
             <StackLayout VerticalOptions="Center"
                          Spacing="20"
-                         Margin="10,0,10,0">
+                         Margin="20,0,20,0">
+
                 <Entry x:Name="TxtIdVehiculo"
                        Placeholder="IdVehiculo"
                        Text="{Binding IdVehiculo}"
@@ -48,7 +49,46 @@
                        HorizontalOptions="Center"
                        FontSize="Large"
                        Margin="0,10,0,10" />
+                <Grid VerticalOptions="Center"
+                      HorizontalOptions="Center">
+                    <Frame BackgroundColor="#D48593"
+                           Margin="0,30"
+                           Padding="3"
+                           CornerRadius="250"
+                           HeightRequest="220"
+                           WidthRequest="230"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center">
+                        <Frame BackgroundColor="#F0DCE6"
+                               Padding="0,0,0,0"
+                               CornerRadius="250"
+                               HeightRequest="230"
+                               WidthRequest="230"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                               BorderColor="#D48593">
+                            <Image Source="{Binding Imagen}" />
+                        </Frame>
+                    </Frame>
 
+                    <Frame HorizontalOptions="End"
+                           VerticalOptions="End"
+                           Margin="60,30"
+                           BackgroundColor="#D48593"
+                           CornerRadius="60"
+                           HeightRequest="76"
+                           WidthRequest="76"
+                           Padding="4">
+                        <ImageButton Source="pencil.png"
+                                     BackgroundColor="#E8B5C4"
+                                     BorderColor="#D48593"
+                                     CornerRadius="60"
+                                     HeightRequest="80"
+                                     WidthRequest="80"
+                                     Padding="13" />
+                    </Frame>
+
+                </Grid>
                 <Frame CornerRadius="15"
                        Padding="10"
                        BackgroundColor="#F7F6F6">
@@ -153,62 +193,24 @@
                 <Frame CornerRadius="15"
                        BackgroundColor="#F7F6F6"
                        Padding="10">
-                    <Entry x:Name="TxtKilomtraje"
-                           Text="{Binding Kilometraje}"
-                           FontSize="16"
-                           Placeholder="Kilometraje recorrido"
-                           Keyboard="Numeric" />
-                </Frame>
-                <Frame CornerRadius="15"
-                       BackgroundColor="#F7F6F6"
-                       Padding="10">
-                    <Entry x:Name="TxtHoraInicial"
-                           Text="{Binding HoraInicial}"
-                           Placeholder="Horas de uso de vehículo"
-                           Keyboard="Numeric"
-                           FontSize="16" />
-                </Frame>
-                <Frame CornerRadius="15"
-                       BackgroundColor="#F7F6F6"
-                       Padding="10">
-                    <Entry x:Name="TxHoraFinal"
-                           Text="{Binding HoraFinal}"
-                           Placeholder="Horas de uso de vehículo"
-                           Keyboard="Numeric"
-                           FontSize="16" />
-                </Frame>
-                <Frame CornerRadius="15"
-                       BackgroundColor="#F7F6F6"
-                       Padding="10">
-                    <Entry x:Name="TxtHoraDeUso"
-                           Text="{Binding HoraDeUso}"
-                           Placeholder="Horas trabajadas de vehículo"
-                           Keyboard="Numeric"
-                           FontSize="16" />
-                </Frame>
-               
-
-                <Frame CornerRadius="15"
-                       BackgroundColor="#F7F6F6"
-                       Padding="10">
                     <StackLayout Orientation="Horizontal"
-                                 HorizontalOptions="Fill">
-                        <Entry x:Name="TxtTiempoVidaLlantas"
-                               Placeholder="Tiempo de vida de llantas"
-                               Text="{Binding TiempoVidaLlantas}"
-                               VerticalOptions="Center"
-                               HorizontalOptions="FillAndExpand"
-                               WidthRequest="300"
+                                 VerticalOptions="FillAndExpand"
+                                 HorizontalOptions="FillAndExpand">
+
+                        <Entry x:Name="TxtKilomtraje"
+                               Text="{Binding Kilometraje}"
                                FontSize="16"
-                               Keyboard="Numeric" />
-                        <Label Text="%"
-                               FontSize="16"
+                               Placeholder="Kilometraje recorrido el día de hoy"
+                               Keyboard="Numeric"
+                               VerticalOptions="FillAndExpand"
+                               HorizontalOptions="FillAndExpand" />
+                        <Label Text="KM"
                                VerticalOptions="End"
-                               Padding="0,0,0,15"
-                               HorizontalOptions="Start" />
+                               FontSize="16"
+                               FontAttributes="Bold" />
                     </StackLayout>
                 </Frame>
-                
+
                 <Frame CornerRadius="15"
                        BackgroundColor="#F7F6F6"
                        Padding="10">
@@ -223,11 +225,41 @@
                 <Frame CornerRadius="15"
                        BackgroundColor="#F7F6F6"
                        Padding="10">
-                    <Editor x:Name="TxtCombustible"
-                            Text="{Binding Combustible}"
-                            Placeholder="Combustible utilizado por el vehiculo"
-                            FontSize="16"
-                            Keyboard="Numeric" />
+                    <StackLayout Orientation="Horizontal"
+                                 VerticalOptions="FillAndExpand"
+                                 HorizontalOptions="FillAndExpand">
+                        <Entry x:Name="TxHoraFinal"
+                               Text="{Binding HoraFinal}"
+                               Placeholder="Horas de uso del dia de hoy"
+                               Keyboard="Numeric"
+                               VerticalOptions="FillAndExpand"
+                               HorizontalOptions="FillAndExpand"
+                               FontSize="16" />
+                        <Label Text="H"
+                               VerticalOptions="End"
+                               FontSize="16"
+                               FontAttributes="Bold" />
+                    </StackLayout>
+                </Frame>
+
+                <Frame CornerRadius="15"
+                       BackgroundColor="#F7F6F6"
+                       Padding="10">
+                    <StackLayout Orientation="Horizontal"
+                                 VerticalOptions="FillAndExpand"
+                                 HorizontalOptions="FillAndExpand">
+                        <Editor x:Name="TxtCombustible"
+                                Text="{Binding Combustible}"
+                                Placeholder="Combustible cargado en el día"
+                                FontSize="16"
+                                Keyboard="Numeric"
+                                VerticalOptions="FillAndExpand"
+                                HorizontalOptions="FillAndExpand" />
+                        <Label Text="L"
+                               VerticalOptions="End"
+                               FontSize="16"
+                               FontAttributes="Bold" />
+                    </StackLayout>
                 </Frame>
 
                 <Button  Text="Guardar"

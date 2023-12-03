@@ -65,6 +65,7 @@ namespace CMP.VistaModelo.Formularios
             {
                 for (int i = 0; i < PorcentajesRuedas.Count; i++)
                 {
+                    int indice = i;
 
                     if (PorcentajesRuedas[i] <= 33)
                     {
@@ -72,7 +73,7 @@ namespace CMP.VistaModelo.Formularios
                     }
                     else if (PorcentajesRuedas[i] > 33 && PorcentajesRuedas[i] <= 66)
                     {
-                        color = "#FFD53D";
+                        color = "#D49E3D";
                     }
                     else if (PorcentajesRuedas[i] > 67)
                     {
@@ -82,7 +83,7 @@ namespace CMP.VistaModelo.Formularios
                     Button Rueda = new Button
                     {
                         Text = $"Rueda {i + 1}: {PorcentajesRuedas[i]}%",
-                        FontSize = 15,
+                        FontSize = 12,
                         FontAttributes = FontAttributes.None,
                         VerticalOptions = LayoutOptions.FillAndExpand,
                         HorizontalOptions = LayoutOptions.FillAndExpand,
@@ -92,13 +93,61 @@ namespace CMP.VistaModelo.Formularios
                         
                     };
 
+                    Rueda.Clicked += (sender, args) => CambiarPorcentajeRuedaClick(indice, GridPorcentajes);
+
+
                     GridPorcentajes.Children.Add(Rueda,i%2, i/2);
                     
                 }
             }
 
         }
-       
+
+        private async void CambiarPorcentajeRuedaClick(int indiceRueda, Grid parametro)
+        {
+            string nuevoPorcentaje = await DisplayPromptAsync("Cambiar Porcentaje", $"Nuevo porcentaje para Rueda {indiceRueda}:", "OK", "Cancelar", "0-100");
+
+            if (nuevoPorcentaje == null) 
+            {
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(nuevoPorcentaje))
+            {
+                await DisplayAlert("Error", "Debes ingresar un valor válido.", "OK");
+                return;
+            }
+
+            if (int.TryParse(nuevoPorcentaje, out int porcentaje)) 
+            {
+                if (porcentaje >= 0 && porcentaje <= 100)
+                {
+                    PorcentajesRuedas[indiceRueda] = porcentaje;
+
+                    DibujarPorcentajesRuedas(parametro);
+
+                    await EditarRuedas();
+                }
+                else
+                {
+                    await DisplayAlert("Error", "El porcentaje debe estar entre 0 y 100.", "OK");
+                }
+            }
+            else
+            {
+                await DisplayAlert("Error", "Debes ingresar un número válido.", "OK");
+            }
+        }
+        public async Task EditarRuedas()
+        {
+            var funcion = new Dvehiculos();
+
+            Parametrosrecive.TiempoVidaLlantas = new List<int>(PorcentajesRuedas);
+
+            await funcion.EditarVehiculo(Parametrosrecive);
+            await DisplayAlert("Vehiculo Guardado", "Datos guardados Correctamente", "Aceptar");
+        }
+
         #endregion
 
         #region COMANDOS

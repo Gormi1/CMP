@@ -179,8 +179,21 @@
                         </StackLayout>
                     </StackLayout>
                 </Frame>
-                
-                
+                <Frame  Margin="10,0,10,0"
+                        CornerRadius="15"
+                        BackgroundColor="#F0DCE6">
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Horas de uso hasta este momento"
+                               FontAttributes="Bold"
+                               FontSize="Body" />
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding Parametrosrecive.HoraInicial}"
+                                   FontSize="Body" />
+                            <Label Text=" H" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
                 <Frame  Margin="10,0,10,0"
                         CornerRadius="15"
                         BackgroundColor="#F0DCE6">
@@ -195,7 +208,7 @@
                               Margin="0,20">
                             
                         </Grid>
-                        <Label Text="Selecciona un botón para cambiar el estado actual de este"
+                        <Label Text="Selecciona una Rueda para cambiar el porcentaje de vida de esta"
                                FontSize="Micro"/>
                     </StackLayout>
                 </Frame>

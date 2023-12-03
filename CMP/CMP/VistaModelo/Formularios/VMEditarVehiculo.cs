@@ -19,12 +19,13 @@ namespace CMP.VistaModelo.Formularios
         public string Tipo { get; set; }
         public string NumeroDeSerie { get; set; }
         public int Kilometraje { get; set; }
-        public int HoraDeUso { get; set; }
+        public int HoraInicial { get; set; }
+        public int HoraFinal { get; set; }
         public int CantLlantas { get; set; }
-        public int TiempoVidaLlantas { get; set; }
         public string DatosExtras { get; set; }
         public string Observaciones { get; set; }
         public string Estado { get; set; }
+        public double Combustible { get; set; }
         public MVehiculos Parametrosrecive { get; set; }
         #endregion
 
@@ -47,27 +48,23 @@ namespace CMP.VistaModelo.Formularios
         public async Task EditarVehiculo()
         {
             var funcion = new Dvehiculos();
-            Parametrosrecive = new MVehiculos
-            {
-                IdVehiculo = IdVehiculo,
-                NumeroEconomico = NumeroEconomico,
-                Modelo = Modelo,
-                Nombre = Nombre,
-                Tipo = Tipo,
-                NumeroDeSerie = NumeroDeSerie,
-                Kilomtraje = Kilometraje,
-                HoraDeUso = HoraDeUso,
-                CantLlantas = CantLlantas,
-                TiempoVidaLlantas = new List<int>(new int[CantLlantas]),
-                DatosExtras = DatosExtras,
-                Observaciones = Observaciones,
-                Estado = Estado
-            };
+
+            Parametrosrecive.Estado = Estado;
+            Parametrosrecive.DatosExtras = DatosExtras;
+            Parametrosrecive.Observaciones = Observaciones;
+            Parametrosrecive.HoraInicial += HoraFinal;
+            Parametrosrecive.HoraFinal = HoraFinal;
+            Parametrosrecive.Kilomtraje += Kilometraje;
+            Parametrosrecive.Combustible += Combustible;
+            int res = Parametrosrecive.HoraInicial - Parametrosrecive.HoraFinal;
+            Parametrosrecive.HoraDeUso += Parametrosrecive.HoraInicial;
+            double Rendimiento = Parametrosrecive.Combustible / res;
+            Parametrosrecive.RendimientoxMes = Rendimiento;
 
             await funcion.EditarVehiculo(Parametrosrecive);
             await DisplayAlert("Vehiculo Guardado", "Datos guardados Correctamente", "Aceptar");
             VaciarCampos();
-            await RegresarAVehiculos();
+            await RegresaraMenu();
         }
         public void LlenarCampos()
         {
@@ -77,13 +74,10 @@ namespace CMP.VistaModelo.Formularios
             Nombre = Parametrosrecive.Nombre;
             Tipo = Parametrosrecive.Tipo;
             NumeroDeSerie = Parametrosrecive.NumeroDeSerie;
-            Kilometraje = Parametrosrecive.Kilomtraje;
-            HoraDeUso = Parametrosrecive.HoraDeUso;
             CantLlantas = Parametrosrecive.CantLlantas;
-            //TiempoVidaLlantas = Parametrosrecive.TiempoVidaLlantas;
             DatosExtras = Parametrosrecive.DatosExtras;
             Observaciones = Parametrosrecive.Observaciones;
-            Estado = Parametrosrecive.Estado; 
+            Estado = Parametrosrecive.Estado;
         }
         public void VaciarCampos()
         {
@@ -94,12 +88,17 @@ namespace CMP.VistaModelo.Formularios
             Tipo = "";
             NumeroDeSerie = "";
             Kilometraje = 0;
-            HoraDeUso = 0;
             CantLlantas = 0;
-            TiempoVidaLlantas = 0;
             DatosExtras = "";
             Observaciones = "";
             Estado = "";
+            HoraInicial = 0;
+            HoraFinal = 0;
+            Combustible = 0;
+        }
+        public async Task RegresaraMenu()
+        {
+            await Navigation.PopToRootAsync();
         }
         public async Task RegresarAVehiculos()
         {
@@ -109,7 +108,8 @@ namespace CMP.VistaModelo.Formularios
 
         #region COMANDOS
 
-        public ICommand VolverMenuCommand => new Command(async () => await RegresarAVehiculos());
+        public ICommand VolverdetallesCommand => new Command(async () => await RegresarAVehiculos());
+        public ICommand VolverMenuCommand => new Command(async () => await RegresaraMenu());
         public ICommand EditarDatosCommando => new Command(async () => await EditarVehiculo());
         #endregion
     }
