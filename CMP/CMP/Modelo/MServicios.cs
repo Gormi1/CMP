@@ -5,11 +5,13 @@ using System.Text;
 
 namespace CMP.Modelo
 {
-    class MServicios
+    public class MServicios
     {
-        public MVehiculos vehiculos { get; set; }
-        public MFecha Fechas {  get; set; }
+        public string IdServicios { get; set; }
+        public string NumeroEconomico { get; set; }
+        public string Icono { get; set; }
+        public string Fechas {  get; set; }
         public string TipoServicio { get; set; }
-        public MItem Objeto {  get; set; }
+        public List<string> Inventario {  get; set; }
     }
 }

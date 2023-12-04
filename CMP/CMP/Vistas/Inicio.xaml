@@ -59,7 +59,8 @@
                                    TextColor="#202020"
                                    HorizontalOptions="CenterAndExpand"
                                    Margin="0,0,0,0"
-                                   FontSize="20" />
+                                   FontSize="20"
+                                   x:Name="labelDisponibles" />
                             <!--Estado 1 de vehiculos en uso-->
                             <Image Grid.Row="1"
                                    Grid.Column="1"
@@ -70,7 +71,8 @@
                                    HorizontalOptions="CenterAndExpand"
                                    Margin="0,00,0,0"
                                    FontSize="20"
-                                   TextColor="#202020" />
+                                   TextColor="#202020"
+                                   x:Name="labelEnUso" />
                             <!--Estado 2 de vehiculos disponibles-->
                             <Image Grid.Row="1"
                                    Grid.Column="2"
@@ -81,7 +83,8 @@
                                    HorizontalOptions="CenterAndExpand"
                                    Margin="0,0,0,0"
                                    FontSize="20"
-                                   TextColor="#202020" />
+                                   TextColor="#202020"
+                                   x:Name="labelEnMantenimiento" />
                             <!--Estado 3 de vehiculos en mantenimieto-->
                             <Button  Text="Calendario"
                                      FontSize="15"
@@ -142,8 +145,8 @@
                                     </Grid>
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding 
-                    Path = BindingContext.AlertaCommand,
-                    Source={x:Reference ListaVehiculos}}"
+                                            Path = BindingContext.AlertaCommand,
+                                            Source={x:Reference ListaVehiculos}}"
                                                               CommandParameter="{Binding .}" />
                                     </Frame.GestureRecognizers>
                                 </Frame>

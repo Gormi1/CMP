@@ -55,7 +55,8 @@ namespace CMP.Datos
             await ConexionFirebase.FBCliente
                 .Child("Servicios")
                 .Child("Vehiculos")
-                .PostAsync(new MVehiculos()
+                .Child(parametro.NumeroEconomico)
+                .PutAsync(new MVehiculos()
                 {
                     IdVehiculo = parametro.IdVehiculo,
                     NumeroEconomico = parametro.NumeroEconomico,

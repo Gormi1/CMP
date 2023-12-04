@@ -26,11 +26,7 @@ namespace CMP.Vistas
 
         private async void Vehiculos_Appearing(object sender, EventArgs e)
         {
-            //await vm.Mostrarvehiculos(ContainerVehiculos);
             await vm.GetVehiculo();
-            
         }
-
-       
     }
 }

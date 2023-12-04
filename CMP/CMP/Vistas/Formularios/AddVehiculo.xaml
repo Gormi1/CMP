@@ -113,6 +113,8 @@
                            Text="{Binding Modelo}"
                            FontSize="16" />
                 </Frame>
+                
+                
                 <Frame CornerRadius="15"
                        BackgroundColor="#F7F6F6"
                        Padding="10">
@@ -128,6 +130,8 @@
                         </Picker.ItemsSource>
                     </Picker>
                 </Frame>
+                
+                
                 <Frame CornerRadius="15"
                        BackgroundColor="#F7F6F6"
                        Padding="10">

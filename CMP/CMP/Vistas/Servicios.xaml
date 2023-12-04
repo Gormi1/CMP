@@ -22,12 +22,89 @@
                    TextColor="White" />
         </Frame>
 
-        <Frame Margin=" 20"
-               CornerRadius="15">
-            <Label Text="servicio"
-                   FontSize="40"
-                   FontAttributes="Bold" />
-        </Frame>
+        <Grid RowDefinitions="*">
+
+            <ScrollView>
+                <StackLayout VerticalOptions="Start"
+                             Margin="10,12,10,0"
+                             Orientation="Vertical"
+                             Spacing="20">
+                    <CollectionView x:Name="ListaServ"
+                                    ItemsSource="{Binding ListaServicios}">
+
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical"
+                                             Span="1"
+                                             VerticalItemSpacing="20" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame CornerRadius="15"
+                                       BackgroundColor="#F0DCE6"
+                                       BorderColor="#EEEDED"
+                                       HasShadow="False">
+                                    <Grid HorizontalOptions="FillAndExpand">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="1,*" />
+                                            <RowDefinition Height="1,*" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50,*" />
+                                            <ColumnDefinition Width="150,*" />
+                                            <ColumnDefinition Width="83,*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Image Source="{Binding Icono}"
+                                               HeightRequest="50"
+                                               WidthRequest="50"
+                                               Margin="0, 0, 6, 0"
+                                               HorizontalOptions="Start"
+                                               Grid.RowSpan="2"
+                                               Grid.Column="0" />
+                                        <Label Text="{Binding NumeroEconomico}"
+                                               HorizontalOptions="StartAndExpand"
+                                               VerticalOptions="Center"
+                                               FontAttributes="Bold"
+                                               Grid.RowSpan="2"
+                                               Grid.Column="1" />
+                                        <Label Text="{Binding Fechas}"
+                                               HorizontalOptions="End"
+                                               VerticalOptions="Center"
+                                               FontSize="15"
+                                               Grid.Row="0"
+                                               Grid.Column="2" />
+                                        <Label Text="{Binding TipoServicio}"
+                                               HorizontalOptions="End"
+                                               VerticalOptions="Center"
+                                               FontSize="15"
+                                               Grid.Row="1"
+                                               Grid.Column="2" />
+                                    </Grid>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding 
+                                                      Path = BindingContext.NavDataVehiculoCommand,
+                                                      Source={x:Reference ListaServ}}"
+                                                              CommandParameter="{Binding .}" />
+                                    </Frame.GestureRecognizers>
+                                </Frame>
+
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                    </CollectionView>
+                </StackLayout>
+            </ScrollView>
+
+            <ImageButton Source="plus.png"
+                         VerticalOptions="EndAndExpand"
+                         HorizontalOptions="EndAndExpand"
+                         HeightRequest="60"
+                         WidthRequest="60"
+                         Margin="0,0,30,30"
+                         CornerRadius="100"
+                         BackgroundColor="White"
+                         Command="{Binding NavAddServiciosCommand}" />
+        </Grid>
 
     </StackLayout>
 </ContentPage>
