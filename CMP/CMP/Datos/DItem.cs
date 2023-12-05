@@ -15,7 +15,21 @@ namespace CMP.Datos
         {
             return (await ConexionFirebase.FBCliente
                 .Child("Servicios")
-                .Child("Objetos")
+                .Child("Inventario")
+                .Child("Aceites")
+                .OnceAsync<MItem>()).Select(Item => new MItem
+                {
+                    IdItem = Item.Key,
+                    NombreItem = Item.Object.NombreItem,
+                    Cantidad = Item.Object.Cantidad,
+                }).ToList();
+        }
+        public async Task<List<MItem>> ObtenerObj2()
+        {
+            return (await ConexionFirebase.FBCliente
+                .Child("Servicios")
+                .Child("Inventario")
+                .Child("Filtros")
                 .OnceAsync<MItem>()).Select(Item => new MItem
                 {
                     IdItem = Item.Key,
@@ -24,15 +38,14 @@ namespace CMP.Datos
                 }).ToList();
         }
 
-        public async Task InsertarVehiculo(MItem parametro)
+        public async Task InsertarItem(MItem parametro)
         {
             await ConexionFirebase.FBCliente
                 .Child("Servicios")
-                .Child("Objetos")
+                .Child("Servicio")
+                .Child(parametro.NombreItem)
                 .PostAsync(new MItem()
                 {
-                    IdItem = parametro.IdItem,
-                    NombreItem = parametro.NombreItem,
                     Cantidad = parametro.Cantidad,
                 });
         }
@@ -41,13 +54,13 @@ namespace CMP.Datos
         {
             var data = (await ConexionFirebase.FBCliente
                 .Child("Servicios")
-                .Child("Vehiculos")
+                .Child("Inventario")
                 .OnceAsync<MItem>())
                 .Where(a => a.Object.IdItem == parametro.IdItem)
                 .FirstOrDefault();
             await ConexionFirebase.FBCliente
                 .Child("Servicios")
-                .Child("Vehiculos")
+                .Child("Inventario")
                 .Child(data.Key)
                 .PutAsync(new MItem()
                 {
@@ -61,7 +74,7 @@ namespace CMP.Datos
         {
             await ConexionFirebase.FBCliente
                 .Child("Servicios")
-                .Child("Vehiculos")
+                .Child("Inventario")
                 .Child(parametro.IdItem)
                 .DeleteAsync();
         }

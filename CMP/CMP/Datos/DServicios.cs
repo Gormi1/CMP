@@ -60,6 +60,7 @@ namespace CMP.Datos
             await ConexionFirebase.FBCliente
                 .Child("Servicios")
                 .Child("Servicios")
+                .Child(parametro.Fechas)
                 .PostAsync(new MServicios()
                 {
                     IdServicios = parametro.IdServicios,

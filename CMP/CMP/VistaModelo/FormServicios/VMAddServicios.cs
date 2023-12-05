@@ -1,4 +1,5 @@
-﻿using CMP.Datos;
+﻿
+using CMP.Datos;
 using CMP.Modelo;
 using CMP.Servicios;
 using Firebase.Database.Query;
@@ -16,8 +17,9 @@ namespace CMP.VistaModelo.FormServicios
     internal class VMAddServicios : BaseViewModel
     {
         #region VARIABLES
+        public MItem data;
         private string _ResultadoFecha;
-        private double _sliderValue;
+        private double _Cantidad;
         DateTime _Fecha;
 
 
@@ -32,15 +34,18 @@ namespace CMP.VistaModelo.FormServicios
         #endregion
 
         #region OBJETOS
-        public double SliderValue
+
+
+
+        public double Cantidad
         {
-            get { return _sliderValue; }
+            get { return _Cantidad; }
             set
             {
-                if (_sliderValue != value)
+                if (_Cantidad != value)
                 {
-                    _sliderValue = value;
-                    OnPropertyChanged(nameof(SliderValue));
+                    _Cantidad = value;
+                    OnPropertyChanged(nameof(Cantidad));
                 }
             }
         }
@@ -61,10 +66,13 @@ namespace CMP.VistaModelo.FormServicios
         #endregion
 
         #region PROCESOS
+
         public async Task RegresarAVehiculos()
         {
             await Navigation.PopAsync();
         }
+
+
         #endregion
 
         #region COMANDOS

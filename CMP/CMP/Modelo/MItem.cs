@@ -8,7 +8,7 @@ namespace CMP.Modelo
     {
         public string IdItem {  get; set; }
         public string NombreItem {  get; set; }
-        public int Cantidad {  get; set; }
+        public double Cantidad {  get; set; }
         
     }
 }

@@ -5,7 +5,7 @@
              NavigationPage.HasNavigationBar="False"
              Visual="Material"
              BackgroundColor="White">
-    
+
     <StackLayout>
         <Frame BackgroundColor="#D48593"
                HorizontalOptions="FillAndExpand"
@@ -83,72 +83,59 @@
                 </Picker>
             </Frame>
 
-            <Frame CornerRadius="15"
-                   BackgroundColor="#F7F6F6"
-                   Padding="10">
-                <StackLayout>
-                    <Label Text="Inventario" />
-                    <ScrollView HeightRequest="150">
-                        <StackLayout>
-                            <Frame CornerRadius="15"
-                                   BackgroundColor="#F7F6F6"
-                                   Padding="10">
-                                <StackLayout>
-                                    <Label Text="Aceite" />
-                                    <Slider Minimum="0"
-                                            Maximum="10"
-                                            Value="{Binding SliderValue, Mode=TwoWay}"
-                                            WidthRequest="200"
-                                            VerticalOptions="CenterAndExpand" />
-                                    <Label Text="{Binding SliderValue, StringFormat='Cantidad : {0:F0}'}" />
-                                </StackLayout>
-                            </Frame>
-                            <Frame CornerRadius="15"
-                                   BackgroundColor="#F7F6F6"
-                                   Padding="10">
-                                <StackLayout>
-                                    <Label Text="Aceite" />
-                                    <Slider Minimum="0"
-                                            Maximum="10"
-                                            Value="{Binding SliderValue, Mode=TwoWay}"
-                                            WidthRequest="200"
-                                            VerticalOptions="CenterAndExpand" />
-                                    <Label Text="{Binding SliderValue, StringFormat='Cantidad : {0:F0}'}" />
-                                </StackLayout>
-                            </Frame>
-                            <Frame CornerRadius="15"
-                                   BackgroundColor="#F7F6F6"
-                                   Padding="10">
-                                <StackLayout>
-                                    <Label Text="Aceite" />
-                                    <Slider Minimum="0"
-                                            Maximum="10"
-                                            Value="{Binding SliderValue, Mode=TwoWay}"
-                                            WidthRequest="200"
-                                            VerticalOptions="CenterAndExpand" />
-                                    <Label Text="{Binding SliderValue, StringFormat='Cantidad : {0:F0}'}" />
-                                </StackLayout>
-                            </Frame>
-                            <Frame CornerRadius="15"
-                                   BackgroundColor="#F7F6F6"
-                                   Padding="10">
-                                <StackLayout>
-                                    <Label Text="Aceite" />
-                                    <Slider Minimum="0"
-                                            Maximum="10"
-                                            Value="{Binding SliderValue, Mode=TwoWay}"
-                                            WidthRequest="200"
-                                            VerticalOptions="CenterAndExpand" />
-                                    <Label Text="{Binding SliderValue, StringFormat='Cantidad : {0:F0}'}" />
-                                </StackLayout>
-                            </Frame>
-
-                        </StackLayout>
-                    </ScrollView>
-                    <Label Text="Deslice para ver todas las opciones" />
-                </StackLayout>
-
-            </Frame>
+            <StackLayout>
+                <Frame CornerRadius="15"
+                       BackgroundColor="#F7F6F6"
+                       Padding="10">
+                    <StackLayout>
+                        <Label Text="Materiales necesarios para el servicio"
+                               FontSize="14"
+                               Margin="10,0,0,0"/>
+                        <Editor Margin="0,0,10,0" />
+                        <Label Text="Escriba todos los materiales que se requieren para este servicio y la cantidad que requiera"
+                               Margin="0,17,0,0"/>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+            
+                
+            <!--<StackLayout>
+                <Frame CornerRadius="15"
+                       BackgroundColor="#F7F6F6"
+                       Padding="10">
+                    <StackLayout>
+                        <Label Text="Inventario"
+                               FontSize="18"
+                               FontAttributes="Bold" />
+                        <ScrollView HeightRequest="150">
+                            <StackLayout>
+                                <ListView x:Name="TuListView">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <Frame CornerRadius="15"
+                                                       BackgroundColor="#F7F6F6"
+                                                       Padding="10">
+                                                    <StackLayout Orientation="Vertical">
+                                                        <Label Text="{Binding NombreItem}" />
+                                                        <Slider Minimum="0"
+                                                                Maximum="10"
+                                                                Value="{Binding Cantidad, Mode=TwoWay}"
+                                                                WidthRequest="200"
+                                                                VerticalOptions="CenterAndExpand" />
+                                                        <Label Text="{Binding Cantidad, StringFormat='Cantidad : {0:F0}'}" />
+                                                    </StackLayout>
+                                                </Frame>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackLayout>
+                        </ScrollView>
+                        <Label Text="Deslice para ver todas las opciones" />
+                    </StackLayout>
+                </Frame>
+            </StackLayout>-->
 
             <Button  Text="Guardar"
                      x:Name="BttnGuardar"
