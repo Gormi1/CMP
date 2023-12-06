@@ -8,19 +8,19 @@ using Xamarin.Forms;
 
 namespace CMP.VistaModelo
 {
-    internal class VMInicio : BaseViewModel
+    internal class VMInicio : VMCompartidoInicioServicios
     {
         #region VARIABLES
+
         #endregion
 
         #region CONSTRUCTOR
-        public VMInicio(INavigation navigation)
+        public VMInicio(INavigation navigation): base(navigation)
         {
             Navigation = navigation;
         }
-        #endregion
 
-        #region 
+        public VMInicio() : base() { }
         #endregion
 
         #region PROCESOS

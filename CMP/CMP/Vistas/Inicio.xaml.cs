@@ -1,13 +1,6 @@
 ﻿using CMP.Datos;
-using CMP.Modelo;
-using CMP.Servicios;
 using CMP.VistaModelo;
-using Firebase.Database;
-using Firebase.Database.Query;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -18,17 +11,22 @@ namespace CMP.Vistas
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Inicio : ContentPage
     {
+        VMInicio VM;
         public Inicio()
         {
             InitializeComponent();
-            BindingContext = new VMInicio(Navigation);
-
+            VM = new VMInicio(Navigation);
+            BindingContext=VM;
+            Appearing += Inicio_Appearing;
         }
-        protected override async void OnAppearing()
+
+        private async void Inicio_Appearing(object sender, EventArgs e)
         {
             base.OnAppearing();
             await ContarVehiculosPorEstado();
+            await VM.GetServicioslimite();
         }
+
         private async Task ContarVehiculosPorEstado()
         {
             Dvehiculos dvehiculos = new Dvehiculos();

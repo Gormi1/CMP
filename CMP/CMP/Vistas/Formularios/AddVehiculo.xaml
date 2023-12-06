@@ -210,7 +210,7 @@
                     <StackLayout Orientation="Horizontal"
                                  VerticalOptions="FillAndExpand"
                                  HorizontalOptions="FillAndExpand">
-                        <Editor x:Name="TxtCombustible"
+                        <Entry x:Name="TxtCombustible"
                                 Text="{Binding Combustible}"
                                 Placeholder="Combustible cargado en el día"
                                 FontSize="16"

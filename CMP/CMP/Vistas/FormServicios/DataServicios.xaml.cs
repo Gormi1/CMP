@@ -1,4 +1,7 @@
-﻿using System;
+﻿using CMP.Modelo;
+using CMP.VistaModelo.FormServicios;
+using CMP.VistaModelo.Formularios;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +15,10 @@ namespace CMP.Vistas.FormServicios
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DataServicios : ContentPage
     {
-        public DataServicios()
+        public DataServicios(MServicios parametros)
         {
             InitializeComponent();
+            BindingContext = new VMDataServicios(Navigation, parametros);
         }
     }
 }

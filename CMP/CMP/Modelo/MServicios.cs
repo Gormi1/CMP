@@ -12,6 +12,7 @@ namespace CMP.Modelo
         public string Icono { get; set; }
         public string Fechas {  get; set; }
         public string TipoServicio { get; set; }
-        public List<string> Inventario {  get; set; }
+        public string Inventario { get; set; }
+        //public List<string> Inventario {  get; set; }
     }
 }

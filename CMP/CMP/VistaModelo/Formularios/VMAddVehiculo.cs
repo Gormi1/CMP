@@ -88,7 +88,7 @@ namespace CMP.VistaModelo.Formularios
                 await funcion.InsertarVehiculo(datos);
                 await DisplayAlert("Vehiculo Guardado", "Datos guardados Correctamente", "Aceptar");
                 VaciarCampos();
-                await RegresarAVehiculos();
+                await RegresarAMenu();
             }
         }
 
@@ -106,6 +106,11 @@ namespace CMP.VistaModelo.Formularios
         public async Task RegresarAVehiculos()
         {
             await Navigation.PopAsync();
+        }
+
+        public async Task RegresarAMenu()
+        {
+            await Navigation.PopToRootAsync();
         }
         #endregion
 

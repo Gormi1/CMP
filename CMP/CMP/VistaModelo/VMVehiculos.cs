@@ -31,7 +31,6 @@ namespace CMP.VistaModelo
         public VMVehiculos(INavigation navigation)
         {
             Navigation = navigation;
-            GetVehiculo();
         }
 
         public VMVehiculos()

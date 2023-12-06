@@ -57,7 +57,8 @@
                 <StackLayout Spacing="0">
                     <Label Text="Seleccione fecha del servicio"
                            FontSize="13"
-                           Margin="12,10,0,0" />
+                           Margin="12,10,0,0"
+                           Padding="0"/>
                     <DatePicker x:Name="DateFechas"
                                 Format="dd-MM-yyyy"
                                 Date="{Binding Fecha, Mode=TwoWay}"
@@ -88,12 +89,14 @@
                        BackgroundColor="#F7F6F6"
                        Padding="10">
                     <StackLayout>
-                        <Label Text="Materiales necesarios para el servicio"
-                               FontSize="14"
-                               Margin="10,0,0,0"/>
-                        <Editor Margin="0,0,10,0" />
+                        <Editor Margin="0,0,10,0"
+                                Text="{Binding InventarioText}"
+                                Placeholder="Materiales necesarios para el servicio"
+                                FontSize="16"
+                                AutoSize="TextChanges" />
                         <Label Text="Escriba todos los materiales que se requieren para este servicio y la cantidad que requiera"
-                               Margin="0,17,0,0"/>
+                               Margin="0,17,0,0"
+                               FontSize="12"/>
                     </StackLayout>
                 </Frame>
             </StackLayout>
@@ -139,7 +142,7 @@
 
             <Button  Text="Guardar"
                      x:Name="BttnGuardar"
-                     Command="{Binding GuardarDatosCommando}"
+                     Command="{Binding GuardarServicioCommand}"
                      VerticalOptions="Center"
                      FontSize="15"
                      Grid.Row="3"

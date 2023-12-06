@@ -5,11 +5,127 @@
              NavigationPage.HasNavigationBar="False"
              Visual="Material"
              BackgroundColor="White">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+    <StackLayout>
+        <Frame BackgroundColor="#D48593"
+               HorizontalOptions="FillAndExpand"
+               HeightRequest="40"
+               Margin="0"
+               Padding="0,10,0,20"
+               HasShadow="False"
+               CornerRadius="0">
+            <Grid ColumnDefinitions="64">
+                <ImageButton Source="back.png"
+                             BackgroundColor="#D48593"
+                             HorizontalOptions="Start"
+                             Grid.Column="0"
+                             Margin="15,0,0,0"
+                             Command="{Binding VolverMenuCommand}" />
+                <Label Text="CalMaP"
+                       HorizontalOptions="End"
+                       VerticalOptions="Center"
+                       FontSize="23"
+                       FontAttributes="Bold"
+                       Margin="0,0,40,-10"
+                       TextColor="White"
+                       Grid.Column="1" />
+            </Grid>
+        </Frame>
+        <ScrollView Margin="0,0,0,10">
+            <StackLayout VerticalOptions="Center"
+                         Spacing="20"
+                         Margin="10,0,10,0"
+                         x:Name="DataVehiculoCont">
+                <Label Text="Datos"
+                       FontSize="Title"
+                       HorizontalOptions="Center"
+                       FontAttributes="Bold" />
+
+                <Frame  Margin="10,0,10,0"
+                        CornerRadius="15"
+                        BackgroundColor="#F0DCE6"
+                        IsVisible="False">
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="IdServicios"
+                               FontAttributes="Bold"
+                               FontSize="Body" />
+                        <Label Text="{Binding Parametrosrecive.IdServicios}"
+                               FontSize="Body" />
+                    </StackLayout>
+                </Frame>
+                <Frame  Margin="10,0,10,0"
+                        CornerRadius="15"
+                        BackgroundColor="#F0DCE6">
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Número economico"
+                               FontAttributes="Bold"
+                               FontSize="Body" />
+                        <Label Text="{Binding Parametrosrecive.NumeroEconomico}"
+                               FontSize="Body" />
+                    </StackLayout>
+                </Frame>
+                <Frame  Margin="10,0,10,0"
+                        CornerRadius="15"
+                        BackgroundColor="#F0DCE6">
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Fecha"
+                               FontAttributes="Bold"
+                               FontSize="Body" />
+                        <Label Text="{Binding Parametrosrecive.Fechas}"
+                               FontSize="Body" />
+                    </StackLayout>
+                </Frame>
+                <Frame  Margin="10,0,10,0"
+                        CornerRadius="15"
+                        BackgroundColor="#F0DCE6">
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Nombre"
+                               FontAttributes="Bold"
+                               FontSize="Body" />
+                        <Label Text="{Binding Parametrosrecive.TipoServicio}"
+                               FontSize="Body" />
+                    </StackLayout>
+                </Frame>
+
+                <Frame  Margin="10,0,10,0"
+                        CornerRadius="15"
+                        BackgroundColor="#F0DCE6">
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Observaciones"
+                               FontAttributes="Bold"
+                               FontSize="Body" />
+                        <Label Text="{Binding Parametrosrecive.Inventario}"
+                               FontSize="Body" />
+                    </StackLayout>
+                </Frame>
+
+                <Button  Text="Editar Datos"
+                         x:Name="BttnModificar"
+                         Command="{Binding IrAEditarCommando}"
+                         VerticalOptions="Center"
+                         FontSize="15"
+                         Grid.Row="3"
+                         Grid.ColumnSpan="3"
+                         FontAttributes="Bold"
+                         Padding="0"
+                         BackgroundColor="#BE5165"
+                         TextColor="White"
+                         CornerRadius="10" />
+                <Button  Text="Completar Servicio"
+                         x:Name="BttnEliminar"
+                         Command="{Binding EliminarServicioCommand}"
+                         VerticalOptions="Center"
+                         FontSize="15"
+                         Grid.Row="3"
+                         Grid.ColumnSpan="3"
+                         FontAttributes="Bold"
+                         Padding="0"
+                         BackgroundColor="#BE5165"
+                         TextColor="White"
+                         CornerRadius="10"
+                         Margin="0,0,0,70" />
+            </StackLayout>
+
+        </ScrollView>
+
+    </StackLayout>
 </ContentPage>
