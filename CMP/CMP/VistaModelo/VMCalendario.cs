@@ -1,4 +1,7 @@
-﻿using CMP.Vistas;
+﻿using CMP.Datos;
+using CMP.Modelo;
+using CMP.Vistas;
+using CMP.Vistas.FormServicios;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,148 +16,41 @@ namespace CMP.VistaModelo
     internal class VMCalendario : BaseViewModel
     {
         #region VARIABLES
-        private DateTime? _date;
-        private ObservableCollection<SpecialDate> attendances;
+        private List<MServicios> _Lista;
+        private DateTime _Fecha;
+        private string _ResultadoFecha;
+        public MServicios Servicios { get; set; }
         #endregion
 
         #region CONSTRUCTOR
         public VMCalendario(INavigation navigation)
         {
-            Initialize();
             Navigation = navigation;
+            Fecha = DateTime.Now;
         }
         #endregion
 
         #region OBJETOS
 
-        public DateTime? Date
+        public DateTime Fecha
         {
-            get
-            {
-                return _date;
-            }
+            get { return _Fecha; }
             set
             {
-                _date = value;
-                NotifyPropertyChanged(nameof(Date));
+                SetValue(ref _Fecha, value);
+                ResultadoFecha = _Fecha.ToString("dd-MM-yyyy");
             }
         }
-        public ObservableCollection<SpecialDate> Attendances
+        public string ResultadoFecha
         {
-            get { return attendances; }
-            set { attendances = value; NotifyPropertyChanged(nameof(Attendances)); }
+            get { return _ResultadoFecha; }
+            set { SetValue(ref _ResultadoFecha, value); }
         }
-
-        private void Initialize()
+        public List<MServicios> ListaFecha
         {
-            var dates = new List<SpecialDate>();
-
-            var grayColor = Color.FromHex("#CCE5E5E5");
-
-            Attendances = new ObservableCollection<SpecialDate>(dates) {
-                new SpecialDate(DateTime.Now.AddDays(3))
-                {
-                    Selectable = true,
-                    BackgroundPattern = new BackgroundPattern(1)
-                    {
-                        Pattern = new List<Pattern>
-                        {
-                            new Pattern{ WidthPercent = 1f, HightPercent = 0.7f, Color = Color.White},
-                            new Pattern{ WidthPercent = 1f, HightPercent = 0.3f, Color = Color.Yellow,Text = "Vacation", TextColor=Color.DarkBlue, TextSize=8, TextAlign=TextAlign.Middle},
-                        }
-                    }
-                },
-                new SpecialDate(DateTime.Now.AddDays(5))
-                {
-                    Selectable = true,
-                    BackgroundPattern = new BackgroundPattern(1)
-                    {
-                        Pattern = new List<Pattern>
-                        {
-                            new Pattern{ WidthPercent = 1f, HightPercent = 0.7f, Color = Color.White},
-                            new Pattern{ WidthPercent = 1f, HightPercent = 0.3f, Color = Color.LightGreen, Text = "Absence", TextColor=Color.DarkBlue, TextSize=8, TextAlign=TextAlign.Middle},
-                        }
-                    }
-                },
-                new SpecialDate(DateTime.Now.AddDays(4))
-                {
-                    Selectable = true,
-                    BackgroundPattern = new BackgroundPattern(1)
-                    {
-                        Pattern = new List<Pattern>
-                        {
-                            new Pattern{ WidthPercent = 1f, HightPercent = 0.7f, Color = grayColor},
-                            new Pattern{ WidthPercent = 1f, HightPercent = 0.15f, Color = Color.Yellow, Text = "Vacation", TextColor=Color.DarkBlue, TextSize=8, TextAlign=TextAlign.Middle},
-                            new Pattern{ WidthPercent = 1f, HightPercent = 0.15f, Color = Color.LightGreen, Text = "Absence", TextColor=Color.DarkBlue, TextSize=8, TextAlign=TextAlign.Middle},
-                        }
-                    }
-                },
-                new SpecialDate(DateTime.Now.AddDays(6))
-                {
-                    Selectable = true,
-                    BackgroundPattern = new BackgroundPattern(1)
-                    {
-                        Pattern = new List<Pattern>
-                        {
-                            new Pattern{ WidthPercent = 1f, HightPercent = 0.7f, Color = grayColor},
-                            new Pattern{ WidthPercent = 1f, HightPercent = 0.3f, Color = Color.LightGreen, Text = "Absence", TextColor=Color.DarkBlue, TextSize=11, TextAlign=TextAlign.Middle},
-                        }
-                    }
-                },
-                new SpecialDate(DateTime.Now)
-                {
-                    Selectable = true,
-                    TextColor = Color.FromHex("#BE5165"),
-                    FontAttributes = FontAttributes.Bold
-                },
-                new SpecialDate(DateTime.Now.AddDays(1))
-                {
-                    Selectable = true,
-                    BackgroundPattern = new BackgroundPattern(1)
-                    {
-                        Pattern = new List<Pattern>
-                        {
-                            new Pattern{ WidthPercent = 1f, HightPercent = 1f, Color = grayColor},
-                        }
-                    }
-                },
-                new SpecialDate(DateTime.Now.AddDays(2))
-                {
-                    Selectable = true,
-                    BackgroundPattern = new BackgroundPattern(1)
-                    {
-                        Pattern = new List<Pattern>
-                        {
-                            new Pattern{ WidthPercent = 1f, HightPercent = 1f, Color = grayColor},
-                        }
-                    }
-                },
-                new SpecialDate(DateTime.Now.AddDays(8))
-                {
-                    Selectable = true,
-                    BackgroundPattern = new BackgroundPattern(1)
-                    {
-                        Pattern = new List<Pattern>
-                        {
-                            new Pattern{ WidthPercent = 1f, HightPercent = 1f, Color = grayColor},
-                        }
-                    }
-                },
-                new SpecialDate(DateTime.Now.AddDays(9))
-                {
-                    Selectable = true,
-                    BackgroundPattern = new BackgroundPattern(1)
-                    {
-                        Pattern = new List<Pattern>
-                        {
-                            new Pattern{ WidthPercent = 1f, HightPercent = 1f, Color = grayColor},
-                        }
-                    }
-                },
-
-            };
+            get { return _Lista; }
+            set { SetValue(ref _Lista, value); }
         }
-
         #endregion
 
         #region PROCESOS
@@ -162,21 +58,30 @@ namespace CMP.VistaModelo
         {
             await Navigation.PopAsync();
         }
-        //public void ProcesoSimple()
-        //{
 
-        //}
+        public async Task<List<MServicios>> ObtenerFechas()
+        {
+            var funcion = new DServicios();
+
+            ListaFecha = await funcion.ObtenerServiciosxfecha(ResultadoFecha);
+
+            Console.Write($"resultados: {ListaFecha}");
+
+            return ListaFecha;
+
+        }
+
+        public async Task IraDataServicio(MServicios parametro)
+        {
+            await Navigation.PushAsync(new DataServicios(parametro));
+        }
         #endregion
 
         #region COMANDOS
-        public Command DateChosenCommand => new Command((obj) =>
-        {
-            System.Diagnostics.Debug.WriteLine(obj as DateTime?);
-        });
 
         public ICommand VolverMenuCommand => new Command(async () => await RegresarAMenu());
-
-
+        public ICommand NavDataServicioCommand => new Command<MServicios>(async (p) => await IraDataServicio(p));
+        public ICommand BuscarFechaCommand => new Command(async () => await ObtenerFechas());
         //public ICommand ProcesoSimpleCommand => new Command(ProcesoSimple);
         #endregion
     }

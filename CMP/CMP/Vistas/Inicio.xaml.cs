@@ -1,6 +1,8 @@
 ﻿using CMP.Datos;
+using CMP.Modelo;
 using CMP.VistaModelo;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -16,19 +18,19 @@ namespace CMP.Vistas
         {
             InitializeComponent();
             VM = new VMInicio(Navigation);
-            BindingContext=VM;
+            BindingContext = VM;
             Appearing += Inicio_Appearing;
         }
 
         private async void Inicio_Appearing(object sender, EventArgs e)
         {
-            base.OnAppearing();
+            ListaServicios.ItemsSource = await VM.GetServicios();
             await ContarVehiculosPorEstado();
-            await VM.GetServicioslimite();
         }
 
         private async Task ContarVehiculosPorEstado()
         {
+
             Dvehiculos dvehiculos = new Dvehiculos();
             var keys = await dvehiculos.ObtenerVehiculos();
 

@@ -20,7 +20,6 @@ namespace CMP.VistaModelo.FormServicios
         public MItem data;
         public string TipoServicio {  get; set; }
         private string _ResultadoFecha;
-        private double _Cantidad;
         private string _Inventario, _NumeroEconomico;
         DateTime _Fecha;
 
@@ -61,19 +60,6 @@ namespace CMP.VistaModelo.FormServicios
                 }
             }
         }
-
-        //public double Cantidad
-        //{
-        //    get { return _Cantidad; }
-        //    set
-        //    {
-        //        if (_Cantidad != value)
-        //        {
-        //            _Cantidad = value;
-        //            OnPropertyChanged(nameof(Cantidad));
-        //        }
-        //    }
-        //}
 
         public DateTime Fecha
         {

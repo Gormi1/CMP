@@ -48,96 +48,6 @@ namespace CMP.VistaModelo
         #endregion
 
         #region PROCESOS
-        #region comentado
-
-        //public void DibujarVehiculos(MVehiculos Item, StackLayout Contenedor)
-        //{
-        //    var carril = Contenedor;
-        //    var frame = new Frame
-        //    {
-        //        CornerRadius = 15,
-        //        BackgroundColor = Color.FromRgb(240, 220, 230),
-        //        BorderColor = Color.FromHex("#EEEDED"),
-        //        HasShadow = false,
-        //    };
-        //    var grid = new Grid
-        //    {
-        //        RowDefinitions = new RowDefinitionCollection
-        //        {
-        //            new RowDefinition { Height = new GridLength(1, GridUnitType.Star) },
-        //            new RowDefinition { Height = new GridLength(1, GridUnitType.Star) }
-        //        },
-        //        ColumnDefinitions = new ColumnDefinitionCollection
-        //        {
-        //            new ColumnDefinition{ Width = new GridLength(50, GridUnitType.Star) },
-        //            new ColumnDefinition{ Width = new GridLength(150, GridUnitType.Star) },
-        //            new ColumnDefinition{ Width = new GridLength(83, GridUnitType.Star) },
-        //        },
-        //        HorizontalOptions = LayoutOptions.FillAndExpand,
-        //    };
-        //    var image = new Image
-        //    {
-        //        Source = Item.Icono,
-        //        HeightRequest = 50,
-        //        WidthRequest = 50,
-        //        Margin = new Thickness(0, 0, 6, 0),
-        //        HorizontalOptions = LayoutOptions.Start,
-        //    };
-        //    Grid.SetRowSpan(image, 2);
-        //    Grid.SetColumn(image, 0);
-        //    var labelNombre = new Label
-        //    {
-        //        Text = Item.Nombre,
-        //        HorizontalOptions = LayoutOptions.StartAndExpand,
-        //        VerticalOptions = LayoutOptions.Center,
-        //        FontAttributes = FontAttributes.Bold,
-        //    };
-        //    Grid.SetRowSpan(labelNombre, 2);
-        //    Grid.SetColumn(labelNombre, 1);
-        //    var labelKilometraje = new Label
-        //    {
-        //        Text = Item.Kilomtraje.ToString(),
-        //        HorizontalOptions = LayoutOptions.End,
-        //        VerticalOptions = LayoutOptions.Center,
-        //        FontSize = 15,
-        //    };
-        //    Grid.SetRow(labelKilometraje, 0);
-        //    Grid.SetColumn(labelKilometraje, 2);
-
-        //    var labelEstado = new Label
-        //    {
-        //        Text = Item.Estado,
-        //        HorizontalOptions = LayoutOptions.End,
-        //        VerticalOptions = LayoutOptions.Center,
-        //        FontSize = 15,
-        //        TextColor = Color.FromHex(_Color(Item.Estado))
-        //    };
-        //    Grid.SetRow(labelEstado, 1);
-        //    Grid.SetColumn(labelEstado, 2);
-
-        //    grid.Children.Add(image);
-        //    grid.Children.Add(labelNombre);
-        //    grid.Children.Add(labelKilometraje);
-        //    grid.Children.Add(labelEstado);
-        //    frame.Content = grid;
-        //    var tap = new TapGestureRecognizer();
-        //    tap.Tapped += async (Object sender, EventArgs e) =>
-        //    {
-        //        await Navigation.PushAsync(new DataVehiculo(Item));
-        //    };
-        //    grid.GestureRecognizers.Add(tap);
-        //    carril.Children.Add(frame);
-        //}
-        //public async Task Mostrarvehiculos(StackLayout Contenedor)
-        //{
-        //    funcion = new Dvehiculos();
-        //    ListaVehiculos = await funcion.ObtenerVehiculos();
-        //    foreach (var item in ListaVehiculos)
-        //    {
-        //        DibujarVehiculos(item, Contenedor);
-        //    }
-        //}
-        #endregion
         string Color(string parametro)
         {
             string color = "";
@@ -166,7 +76,7 @@ namespace CMP.VistaModelo
                 Estado = Estado,
             };
 
-            ListaVehiculos = await funcion.ObtenerVehiculos();
+            ListaVehiculos = await funcion.ObtenerVehiculosCacheOInternetAsync();
         }
         public async Task IraAddVehiculo()
         {

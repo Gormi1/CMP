@@ -60,7 +60,7 @@
                                                FontAttributes="Bold"
                                                Grid.RowSpan="2"
                                                Grid.ColumnSpan="2"
-                                               Margin="10"/>
+                                               Margin="10" />
                                         <Label Text="{Binding Fechas}"
                                                HorizontalOptions="End"
                                                VerticalOptions="Center"
@@ -81,10 +81,8 @@
                                                               CommandParameter="{Binding .}" />
                                     </Frame.GestureRecognizers>
                                 </Frame>
-
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
-
                     </CollectionView>
                 </StackLayout>
             </ScrollView>

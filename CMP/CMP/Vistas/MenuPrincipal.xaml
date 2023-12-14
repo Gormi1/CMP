@@ -10,14 +10,14 @@
             xmlns:local="clr-namespace:CMP.Vistas"
             android:TabbedPage.ToolbarPlacement="Bottom"
             Visual="Material">
-
+    
     <local:Inicio Title="Inicio"
                   IconImageSource="BarHome.png" />
     <local:Vehiculos Title="Vehiculos"
                      IconImageSource="BarVehiculo.png" />
     <local:Servicios Title="Servicios"
                      IconImageSource="BarServicio.png" />
-    <local:Usuario Title="Usuario"
-                   IconImageSource="BarUser.png" />
+    <!--<local:Usuario Title="Usuario"
+                   IconImageSource="BarUser.png" />-->
 
 </TabbedPage>

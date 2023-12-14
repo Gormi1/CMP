@@ -78,7 +78,7 @@
                         CornerRadius="15"
                         BackgroundColor="#F0DCE6">
                     <StackLayout Orientation="Vertical">
-                        <Label Text="Nombre"
+                        <Label Text="Tipo de servicio"
                                FontAttributes="Bold"
                                FontSize="Body" />
                         <Label Text="{Binding Parametrosrecive.TipoServicio}"
@@ -90,7 +90,7 @@
                         CornerRadius="15"
                         BackgroundColor="#F0DCE6">
                     <StackLayout Orientation="Vertical">
-                        <Label Text="Observaciones"
+                        <Label Text="Materiales"
                                FontAttributes="Bold"
                                FontSize="Body" />
                         <Label Text="{Binding Parametrosrecive.Inventario}"

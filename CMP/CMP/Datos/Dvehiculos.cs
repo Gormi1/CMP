@@ -1,6 +1,7 @@
 ﻿using CMP.Modelo;
 using CMP.Servicios;
 using Firebase.Database.Query;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,24 @@ namespace CMP.Datos
 
     internal class Dvehiculos
     {
+        public async Task<List<MVehiculos>> ObtenerVehiculosCacheOInternetAsync()
+        {
+            var cachedData = await SecureStorage.GetAsync("cachedVehiculosData");
+
+            // Intenta cargar desde la caché local
+            if (!string.IsNullOrEmpty(cachedData))
+            {
+                return JsonConvert.DeserializeObject<List<MVehiculos>>(cachedData);
+            }
+
+            // Si no hay datos en la caché, intenta cargar desde Firebase
+            var vehiculos = await ObtenerVehiculos();
+
+            // Guarda los datos en la caché local de manera asíncrona
+            await SecureStorage.SetAsync("cachedVehiculosData", JsonConvert.SerializeObject(vehiculos));
+
+            return vehiculos;
+        }
         public async Task<List<MVehiculos>> ObtenerVehiculos()
         {
             return (await ConexionFirebase.FBCliente

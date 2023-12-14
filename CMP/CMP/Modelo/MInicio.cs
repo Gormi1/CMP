@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CMP.Modelo
 {
-    class MFecha
+    internal class MInicio
     {
         public string IdServicios { get; set; }
         public string NumeroEconomico { get; set; }
