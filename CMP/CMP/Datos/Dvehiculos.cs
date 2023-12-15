@@ -96,45 +96,6 @@ namespace CMP.Datos
                     RendimientoxMes = parametro.RendimientoxMes,
                 });
         }
-        public async Task<List<MVehiculos>> MostrarVehiculosxIdVehiculo(string IdVehiculo)
-        {
-            return (await ConexionFirebase.FBCliente
-                .Child("Servicios")
-                .Child("Vehiculos")
-                .OnceAsync<MVehiculos>())
-                .Where(a => a.Object.IdVehiculo == IdVehiculo).Select(Item => new MVehiculos
-                {
-                    NumeroEconomico = Item.Object.NumeroEconomico
-                }).ToList();
-        }
-
-        public async Task<List<MVehiculos>> ObtenerVehiculoxId(string IdVehiculo)
-        {
-            return (await ConexionFirebase.FBCliente
-                .Child("Servicios")
-                .Child("Vehiculos")
-                .OnceAsync<MVehiculos>())
-                .Where(a => a.Object.IdVehiculo == IdVehiculo).Select(Item => new MVehiculos
-                {
-                    IdVehiculo = Item.Key,
-                    NumeroEconomico = Item.Object.NumeroEconomico,
-                    NumeroDeSerie = Item.Object.NumeroDeSerie,
-                    Nombre = Item.Object.Nombre,
-                    Modelo = Item.Object.Modelo,
-                    Tipo = Item.Object.Tipo,
-                    Estado = Item.Object.Estado,
-                    CantLlantas = Item.Object.CantLlantas,
-                    TiempoVidaLlantas = Item.Object.TiempoVidaLlantas,
-                    Kilomtraje = Item.Object.Kilomtraje,
-                    HoraInicial = Item.Object.HoraInicial,
-                    HoraFinal = Item.Object.HoraFinal,
-                    HoraDeUso = Item.Object.HoraDeUso,
-                    DatosExtras = Item.Object.DatosExtras,
-                    Observaciones = Item.Object.Observaciones,
-                    Combustible = Item.Object.Combustible,
-                    RendimientoxMes = Item.Object.RendimientoxMes,
-                }).ToList();
-        }
         public async Task EditarVehiculo(MVehiculos parametro)
         {
             

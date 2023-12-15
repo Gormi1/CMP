@@ -1,10 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vistamodelo="clr-namespace:CMP.VistaModelo"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             x:DataType="vistamodelo:VMInicio"
-             x:Class="CMP.Vistas.Inicio"
+             x:Class="CMP.Vistas.Ïnicio2"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="White"
              Visual="Material">
@@ -107,7 +104,7 @@
 
             <Frame Margin="15,0,15,15"
                    CornerRadius="15">
-                <CollectionView x:Name="ListaServicios"
+                <CollectionView x:Name="ListaIni"
                                 ItemsSource="{Binding Listainicio}"
                                 HeightRequest="320">
 
@@ -161,8 +158,8 @@
                                 </Grid>
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding 
-                                         Path = BindingContext.NavDataServicioCommand,
-                                         Source={x:Reference ListaServicios}}"
+                      Path = BindingContext.NavDataServicioCommand,
+                      Source={x:Reference ListaIni}}"
                                                           CommandParameter="{Binding .}" />
                                 </Frame.GestureRecognizers>
                             </Frame>

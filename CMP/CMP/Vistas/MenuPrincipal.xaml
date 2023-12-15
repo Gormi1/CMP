@@ -11,7 +11,7 @@
             android:TabbedPage.ToolbarPlacement="Bottom"
             Visual="Material">
     
-    <local:Inicio Title="Inicio"
+    <local:Ïnicio2 Title="Inicio"
                   IconImageSource="BarHome.png" />
     <local:Vehiculos Title="Vehiculos"
                      IconImageSource="BarVehiculo.png" />

@@ -10,13 +10,13 @@ using Xamarin.Forms.Xaml;
 
 namespace CMP.Vistas
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Calendario : ContentPage
-    {
-        public Calendario()
-        {
-            InitializeComponent();
+	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class Calendario2 : ContentPage
+	{
+		public Calendario2 ()
+		{
+			InitializeComponent ();
             BindingContext = new VMCalendario(Navigation);
         }
-    }
+	}
 }

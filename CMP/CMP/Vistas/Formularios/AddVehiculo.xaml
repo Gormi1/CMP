@@ -40,7 +40,7 @@
                        HorizontalOptions="Center"
                        FontSize="Large"
                        Margin="0,10,0,10" />
-                <Grid VerticalOptions="Center"
+                <!--<Grid VerticalOptions="Center"
                       HorizontalOptions="Center">
                     <Frame BackgroundColor="#D48593"
                            Margin="0,30"
@@ -79,7 +79,7 @@
                                      Padding="13" />
                     </Frame>
 
-                </Grid>
+                </Grid>-->
 
                 <Frame CornerRadius="15"
                        Padding="10"

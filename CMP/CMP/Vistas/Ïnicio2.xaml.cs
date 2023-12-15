@@ -1,8 +1,9 @@
 ﻿using CMP.Datos;
-using CMP.Modelo;
 using CMP.VistaModelo;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -10,21 +11,22 @@ using Xamarin.Forms.Xaml;
 
 namespace CMP.Vistas
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Inicio : ContentPage
-    {
-        VMInicio VM;
-        public Inicio()
-        {
-            InitializeComponent();
-            VM = new VMInicio(Navigation);
+	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class Ïnicio2 : ContentPage
+	{
+		VMInicio2 VM;
+		public Ïnicio2 ()
+		{
+			InitializeComponent ();
+
+            VM = new VMInicio2(Navigation);
             BindingContext = VM;
-            Appearing += Inicio_Appearing;
+            Appearing += Inicio2_Appearing;
         }
 
-        private async void Inicio_Appearing(object sender, EventArgs e)
+        private async void Inicio2_Appearing(object sender, EventArgs e)
         {
-            ListaServicios.ItemsSource = await VM.GetServicios();
+            ListaIni.ItemsSource = await VM.GetServicios();
             await ContarVehiculosPorEstado();
         }
 

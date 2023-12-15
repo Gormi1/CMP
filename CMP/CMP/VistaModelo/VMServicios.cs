@@ -14,9 +14,6 @@ namespace CMP.VistaModelo
     public class VMServicios : BaseViewModel
     {
         #region VARIABLES
-
-        DServicios función = new DServicios();
-
         List<MServicios> _ListaServicios;
         #endregion
 
@@ -46,12 +43,6 @@ namespace CMP.VistaModelo
             // Intenta cargar desde la caché local
             ListaServicios = await función.ObtenerServiciosRecientesOFuturos();
 
-            // Si no hay datos en la caché, carga desde Firebase y actualiza la caché
-            if (ListaServicios == null || ListaServicios.Count == 0)
-            {
-                ListaServicios = await función.ObtenerServiciosRecientesOFuturos();
-                await función.ActualizarCacheAsync(ListaServicios);
-            }
         }
 
         public async Task IraDataServicio(MServicios parametro)

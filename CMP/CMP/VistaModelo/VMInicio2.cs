@@ -12,20 +12,20 @@ using Xamarin.Forms;
 
 namespace CMP.VistaModelo
 {
-    internal class VMInicio : BaseViewModel
+    class VMInicio2 : BaseViewModel
     {
         #region VARIABLES
+        List<MServicios> _Listainicio;
 
-        public List<MServicios> Listainicio { get; set; }
-        public string NumeroEconomico { get; set; }
-        public string Fechas { get; set; }
-        public string TipoServicio { get; set; }
+        private string numeroEconomico;
 
+        private string fechas;
 
+        private string tipoServicio;
         #endregion
 
         #region CONSTRUCTOR
-        public VMInicio(INavigation navigation)
+        public VMInicio2(INavigation navigation)
         {
             Navigation = navigation;
         }
@@ -33,6 +33,14 @@ namespace CMP.VistaModelo
         #endregion
 
         #region Objetos
+        public string TipoServicio { get => tipoServicio; set => SetProperty(ref tipoServicio, value); }
+        public string NumeroEconomico { get => numeroEconomico; set => SetProperty(ref numeroEconomico, value); }
+        public string Fechas { get => fechas; set => SetProperty(ref fechas, value); }
+        public List<MServicios> Listainicio
+        {
+            get { return _Listainicio; }
+            set { SetValue(ref _Listainicio, value); }
+        }
 
         #endregion
 
@@ -41,19 +49,13 @@ namespace CMP.VistaModelo
         {
             var función = new DServicios();
 
-            Listainicio = await función.ObtenerServiciosRecientesOFuturos2();
+            Listainicio = await función.ObtenerServiciosRecientesOFuturos();
 
-            foreach (var item in Listainicio)
-            {
-                NumeroEconomico = item.NumeroEconomico;
-                Fechas = item.Fechas;
-                TipoServicio = item.TipoServicio;
-            }
             return Listainicio.Take(3).ToList();
         }
         public async Task IrACalendario()
         {
-            await Navigation.PushAsync(new Calendario());
+            await Navigation.PushAsync(new Calendario2());
         }
         public async Task IraDataServicio(MServicios parametro)
         {
@@ -63,6 +65,7 @@ namespace CMP.VistaModelo
 
         #region COMANDOS
         public ICommand NavCalendarioCommand => new Command(async () => await IrACalendario());
+
         public ICommand NavDataServicioCommand => new Command<MServicios>(async (p) => await IraDataServicio(p));
 
         #endregion

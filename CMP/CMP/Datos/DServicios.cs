@@ -33,39 +33,8 @@ namespace CMP.Datos
             // Guarda los datos en la caché local de manera asíncrona
             await SecureStorage.SetAsync("cachedData", JsonConvert.SerializeObject(servicios));
         }
-        public async Task<List<MServicios>> ObtenerServicios()
-        {
-            return (await ConexionFirebase.FBCliente
-                .Child("Servicios")
-                .Child("Servicios")
-                .OnceAsync<MServicios>())
-                .Select(Item => new MServicios
-                {
-                    IdServicios = Item.Key,
-                    NumeroEconomico = Item.Object.NumeroEconomico,
-                    Fechas = Item.Object.Fechas,
-                    Icono = Item.Object.Icono,
-                    Inventario = Item.Object.Inventario,
-                    TipoServicio = Item.Object.TipoServicio,
-                }).ToList();
-        }
-        public async Task<List<MServicios>> ObtenerServiciosxfecha(string Fecha)
-        {
-            return (await ConexionFirebase.FBCliente
-                .Child("Servicios")
-                .Child("Servicios")
-                .Child(Fecha)
-                .OnceAsync<MServicios>())
-                .Select(Item => new MServicios
-                {
-                    IdServicios = Item.Key,
-                    NumeroEconomico = Item.Object.NumeroEconomico,
-                    Fechas = Item.Object.Fechas,
-                    Icono = Item.Object.Icono,
-                    Inventario = Item.Object.Inventario,
-                    TipoServicio = Item.Object.TipoServicio,
-                }).ToList();
-        }
+
+
         public async Task<List<MServicios>> ObtenerServiciosxIdPersonalizada()
         {
             var result = new List<MServicios>();
@@ -98,6 +67,23 @@ namespace CMP.Datos
             }
 
             return result;
+        }
+        public async Task<List<MServicios>> ObtenerServiciosxfecha(string Fecha)
+        {
+            return (await ConexionFirebase.FBCliente
+                .Child("Servicios")
+                .Child("Servicios")
+                .Child(Fecha)
+                .OnceAsync<MServicios>())
+                .Select(Item => new MServicios
+                {
+                    IdServicios = Item.Key,
+                    NumeroEconomico = Item.Object.NumeroEconomico,
+                    Fechas = Item.Object.Fechas,
+                    Icono = Item.Object.Icono,
+                    Inventario = Item.Object.Inventario,
+                    TipoServicio = Item.Object.TipoServicio,
+                }).ToList();
         }
         public async Task<List<MServicios>> ObtenerServiciosRecientesOFuturos()
         {
@@ -134,70 +120,6 @@ namespace CMP.Datos
             }
 
             return result;
-        }
-        public async Task<List<MServicios>> ObtenerServiciosRecientesOFuturos2()
-        {
-            var result = new List<MServicios>();
-
-            try
-            {
-                var serviciosPorFecha = (await ConexionFirebase.FBCliente
-                    .Child("Servicios")
-                    .Child("Servicios")
-                    .OnceAsync<Dictionary<string, MServicios>>())
-                    .SelectMany(fechaNode => fechaNode.Object.Select(servicioNode => new MServicios
-                    {
-                        IdServicios = servicioNode.Key,
-                        NumeroEconomico = servicioNode.Value.NumeroEconomico,
-                        Fechas = servicioNode.Value.Fechas,
-                        Icono = servicioNode.Value.Icono,
-                        Inventario = servicioNode.Value.Inventario,
-                        TipoServicio = servicioNode.Value.TipoServicio,
-                    }))
-                    .ToList();
-
-                // Filtrar solo los servicios con fechas recientes o futuras
-                var a = serviciosPorFecha.Where(servicio => DateTime.TryParseExact(servicio.Fechas, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out _)
-                                       && DateTime.ParseExact(servicio.Fechas, "dd-MM-yyyy", CultureInfo.InvariantCulture) >= DateTime.Today);
-
-                result.AddRange(a);
-            }
-            catch (Exception ex)
-            {
-                // Maneja la excepción de manera adecuada (por ejemplo, registrándola o lanzándola nuevamente)
-                Console.WriteLine($"Error al obtener servicios: {ex.Message}");
-                throw;
-            }
-
-            return result;
-        }
-        public async Task<List<MServicios>> MostrarServiciosxIdServicios(string IdServicios)
-        {
-            return (await ConexionFirebase.FBCliente
-                .Child("Servicios")
-                .Child("Servicios")
-                .OnceAsync<MServicios>())
-                .Where(a => a.Object.IdServicios == IdServicios).Select(Item => new MServicios
-                {
-                    NumeroEconomico = Item.Object.NumeroEconomico
-                }).ToList();
-        }
-
-        public async Task<List<MServicios>> ObtenerServiciosxId(string IdServicios)
-        {
-            return (await ConexionFirebase.FBCliente
-                .Child("Servicios")
-                .Child("Servicios")
-                .OnceAsync<MServicios>())
-                .Where(a => a.Object.IdServicios == IdServicios).Select(Item => new MServicios
-                {
-                    IdServicios = Item.Key,
-                    NumeroEconomico = Item.Object.NumeroEconomico,
-                    Fechas = Item.Object.Fechas,
-                    Icono = Item.Object.Icono,
-                    Inventario = Item.Object.Inventario,
-                    TipoServicio = Item.Object.TipoServicio,
-                }).ToList();
         }
         public async Task InsertarServicios(MServicios parametro)
         {
