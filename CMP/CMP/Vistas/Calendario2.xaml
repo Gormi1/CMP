@@ -116,7 +116,7 @@
                             </Grid>
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding 
-                      Path = BindingContext.NavDataServicioCommand,
+                      Path = BindingContext.NavDataBitacoraCommand,
                       Source={x:Reference ListaServicios}}"
                                                       CommandParameter="{Binding .}" />
                             </Frame.GestureRecognizers>

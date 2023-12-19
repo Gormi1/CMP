@@ -45,7 +45,10 @@ namespace CMP.VistaModelo.FormServicios
             if (response)
             {
                 var funcion = new DServicios();
+                var funcion2 = new DBitacora();
+                await funcion2.InsertarServicios(Parametrosrecive);
                 await funcion.EliminarServicios(Parametrosrecive);
+
                 await DisplayAlert("Exito", "Servicio Completado", "ok");
             }
             else

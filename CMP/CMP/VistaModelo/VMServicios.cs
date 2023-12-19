@@ -40,8 +40,7 @@ namespace CMP.VistaModelo
         {
             var función = new DServicios();
 
-            // Intenta cargar desde la caché local
-            ListaServicios = await función.ObtenerServiciosRecientesOFuturos();
+            ListaServicios = await función.ObtenerServicios();
 
         }
 

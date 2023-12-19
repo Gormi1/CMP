@@ -49,7 +49,7 @@ namespace CMP.VistaModelo
         {
             var función = new DServicios();
 
-            Listainicio = await función.ObtenerServiciosRecientesOFuturos();
+            Listainicio = await función.ObtenerServicios();
 
             return Listainicio.Take(3).ToList();
         }

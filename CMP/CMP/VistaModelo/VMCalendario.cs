@@ -61,7 +61,7 @@ namespace CMP.VistaModelo
 
         public async Task<List<MServicios>> ObtenerFechas()
         {
-            var funcion = new DServicios();
+            var funcion = new DBitacora();
 
             ListaFecha = await funcion.ObtenerServiciosxfecha(ResultadoFecha);
 
@@ -71,16 +71,16 @@ namespace CMP.VistaModelo
 
         }
 
-        public async Task IraDataServicio(MServicios parametro)
+        public async Task IraDataBitacora(MServicios parametro)
         {
-            await Navigation.PushAsync(new DataServicios(parametro));
+            await Navigation.PushAsync(new DataBitacora(parametro));
         }
         #endregion
 
         #region COMANDOS
 
         public ICommand VolverMenuCommand => new Command(async () => await RegresarAMenu());
-        public ICommand NavDataServicioCommand => new Command<MServicios>(async (p) => await IraDataServicio(p));
+        public ICommand NavDataBitacoraCommand => new Command<MServicios>(async (p) => await IraDataBitacora(p));
         public ICommand BuscarFechaCommand => new Command(async () => await ObtenerFechas());
         //public ICommand ProcesoSimpleCommand => new Command(ProcesoSimple);
         #endregion
