@@ -15,6 +15,7 @@ namespace CMP.Vistas.FormServicios
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DataServicios : ContentPage
     {
+        //Constructor con parametro de tipo MServicios
         public DataServicios(MServicios parametros)
         {
             InitializeComponent();

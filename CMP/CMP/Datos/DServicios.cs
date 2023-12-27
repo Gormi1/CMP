@@ -34,11 +34,13 @@ namespace CMP.Datos
 
         public async Task InsertarServicios(MServicios parametro)
         {
+            // realiza la buscqueda de la ruta y con post insterará los datos ya que a pesar de ser una función de modificar, sino encuentra los datos que requirere modificar, crea uno nuevo
             await ConexionFirebase.FBCliente
                 .Child("Servicios")
                 .Child("Servicios")
                 .PostAsync(new MServicios()
                 {
+                    //toma los datos guardados en el modelo y los agregar a firebase
                     IdServicios = parametro.IdServicios,
                     NumeroEconomico = parametro.NumeroEconomico,
                     Fechas = parametro.Fechas,
@@ -82,4 +84,3 @@ namespace CMP.Datos
 
     }
 }
-

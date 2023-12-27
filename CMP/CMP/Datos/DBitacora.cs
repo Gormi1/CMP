@@ -1,10 +1,8 @@
 ﻿using CMP.Modelo;
 using CMP.Servicios;
 using Firebase.Database.Query;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CMP.Datos
@@ -28,10 +26,11 @@ namespace CMP.Datos
         }
         public async Task<List<MServicios>> ObtenerServiciosxfecha(string Fecha)
         {
+            // regresa los datos traidos de la ruta con el agregado que depende de la variable Fecha sacada del modelo
             return (await ConexionFirebase.FBCliente
                 .Child("Servicios")
                 .Child("Bitacora")
-                .Child(Fecha)
+                .Child(Fecha) // los servicos guardados en la vitacora estan clasificados por fecha, así que se muestran dependiendo de la fecha seleccionada
                 .OnceAsync<MServicios>())
                 .Select(Item => new MServicios
                 {

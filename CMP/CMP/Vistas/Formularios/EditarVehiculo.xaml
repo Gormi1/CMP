@@ -49,46 +49,6 @@
                        HorizontalOptions="Center"
                        FontSize="Large"
                        Margin="0,10,0,10" />
-                <Grid VerticalOptions="Center"
-                      HorizontalOptions="Center">
-                    <Frame BackgroundColor="#D48593"
-                           Margin="0,30"
-                           Padding="3"
-                           CornerRadius="250"
-                           HeightRequest="220"
-                           WidthRequest="230"
-                           VerticalOptions="Center"
-                           HorizontalOptions="Center">
-                        <Frame BackgroundColor="#F0DCE6"
-                               Padding="0,0,0,0"
-                               CornerRadius="250"
-                               HeightRequest="230"
-                               WidthRequest="230"
-                               VerticalOptions="Center"
-                               HorizontalOptions="Center"
-                               BorderColor="#D48593">
-                            <Image Source="{Binding Imagen}" />
-                        </Frame>
-                    </Frame>
-
-                    <Frame HorizontalOptions="End"
-                           VerticalOptions="End"
-                           Margin="60,30"
-                           BackgroundColor="#D48593"
-                           CornerRadius="60"
-                           HeightRequest="76"
-                           WidthRequest="76"
-                           Padding="4">
-                        <ImageButton Source="pencil.png"
-                                     BackgroundColor="#E8B5C4"
-                                     BorderColor="#D48593"
-                                     CornerRadius="60"
-                                     HeightRequest="80"
-                                     WidthRequest="80"
-                                     Padding="13" />
-                    </Frame>
-
-                </Grid>
                 <Frame CornerRadius="15"
                        Padding="10"
                        BackgroundColor="#F7F6F6">
@@ -221,7 +181,6 @@
                             FontSize="16"
                             AutoSize="TextChanges" />
                 </Frame>
-
                 <Frame CornerRadius="15"
                        BackgroundColor="#F7F6F6"
                        Padding="10">
@@ -241,7 +200,6 @@
                                FontAttributes="Bold" />
                     </StackLayout>
                 </Frame>
-
                 <Frame CornerRadius="15"
                        BackgroundColor="#F7F6F6"
                        Padding="10">
@@ -261,7 +219,6 @@
                                FontAttributes="Bold" />
                     </StackLayout>
                 </Frame>
-
                 <Button  Text="Guardar"
                          x:Name="BttnGuardar"
                          Command="{Binding EditarDatosCommando}"
@@ -277,6 +234,5 @@
                          Margin="0,0,0,70" />
             </StackLayout>
         </ScrollView>
-
     </StackLayout>
 </ContentPage>

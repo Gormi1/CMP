@@ -10,7 +10,6 @@ namespace CMP
 {
     public partial class App : Application
     {
-        private DServicios _servicios;
         public App()
         {
             InitializeComponent();

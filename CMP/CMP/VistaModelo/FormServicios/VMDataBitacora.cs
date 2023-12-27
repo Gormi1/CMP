@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace CMP.VistaModelo.Formularios
+namespace CMP.VistaModelo.FormServicios
 {
-    internal class VMDataBitacora : BaseViewModel
+    public class VMDataBitacora : BaseViewModel
     {
         #region VARIABLES
 

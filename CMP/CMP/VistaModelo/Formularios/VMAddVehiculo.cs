@@ -1,6 +1,7 @@
 ﻿using CMP.Datos;
 using CMP.Modelo;
 using CMP.Servicios;
+using CMP.VistaModelo.FormServicios;
 using CMP.Vistas;
 using CMP.Vistas.Formularios;
 using Firebase.Database;
@@ -76,7 +77,7 @@ namespace CMP.VistaModelo.Formularios
                     Tipo = Tipo,
                     Estado = Estado,
                     CantLlantas = CantLlantas,
-                    TiempoVidaLlantas = new List<int>(new int[CantLlantas]),                   
+                    TiempoVidaLlantas = new List<int>(new int[CantLlantas]),
                     Kilomtraje = Kilometraje,
                     HoraInicial = HoraInicial,
                     HoraFinal = HoraFinal,
@@ -91,6 +92,7 @@ namespace CMP.VistaModelo.Formularios
                 await RegresarAMenu();
             }
         }
+
 
         public void VaciarCampos()
         {
@@ -112,6 +114,8 @@ namespace CMP.VistaModelo.Formularios
         {
             await Navigation.PopToRootAsync();
         }
+
+
         #endregion
 
         #region COMANDOS

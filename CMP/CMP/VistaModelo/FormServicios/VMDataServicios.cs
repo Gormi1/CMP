@@ -11,7 +11,7 @@ using Xamarin.Forms;
 
 namespace CMP.VistaModelo.FormServicios
 {
-    internal class VMDataServicios : BaseViewModel
+    public class VMDataServicios : BaseViewModel
     {
         #region VARIABLES
 
@@ -67,6 +67,6 @@ namespace CMP.VistaModelo.FormServicios
         public ICommand EliminarServicioCommand => new Command(async () => await EliminarServicio());
 
         #endregion
-    
+
     }
 }

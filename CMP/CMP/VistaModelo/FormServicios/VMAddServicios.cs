@@ -1,24 +1,16 @@
-﻿
-using CMP.Datos;
+﻿using CMP.Datos;
 using CMP.Modelo;
-using CMP.Servicios;
-using Firebase.Database.Query;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace CMP.VistaModelo.FormServicios
 {
-    internal class VMAddServicios : BaseViewModel
+    public class VMAddServicios : BaseViewModel
     {
         #region VARIABLES
-        public MItem data;
-        public string TipoServicio {  get; set; }
+        public string TipoServicio { get; set; }
         private string _ResultadoFecha;
         private string _Inventario, _NumeroEconomico;
         DateTime _Fecha;
@@ -81,7 +73,7 @@ namespace CMP.VistaModelo.FormServicios
 
         public async Task AgregarServicio()
         {
-            if (string.IsNullOrEmpty(NumeroEconomico)||
+            if (string.IsNullOrEmpty(NumeroEconomico) ||
                 string.IsNullOrEmpty(InventarioText) ||
                 string.IsNullOrEmpty(TipoServicio))
             {
@@ -133,4 +125,6 @@ namespace CMP.VistaModelo.FormServicios
 
         #endregion
     }
+
 }
+

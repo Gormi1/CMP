@@ -2,10 +2,8 @@
 using CMP.Servicios;
 using Firebase.Database.Query;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 
@@ -15,32 +13,17 @@ namespace CMP.Datos
 
     internal class Dvehiculos
     {
-        public async Task<List<MVehiculos>> ObtenerVehiculosCacheOInternetAsync()
-        {
-            var cachedData = await SecureStorage.GetAsync("cachedVehiculosData");
-
-            // Intenta cargar desde la caché local
-            if (!string.IsNullOrEmpty(cachedData))
-            {
-                return JsonConvert.DeserializeObject<List<MVehiculos>>(cachedData);
-            }
-
-            // Si no hay datos en la caché, intenta cargar desde Firebase
-            var vehiculos = await ObtenerVehiculos();
-
-            // Guarda los datos en la caché local de manera asíncrona
-            await SecureStorage.SetAsync("cachedVehiculosData", JsonConvert.SerializeObject(vehiculos));
-
-            return vehiculos;
-        }
         public async Task<List<MVehiculos>> ObtenerVehiculos()
         {
+            // regresa los datos obtenidos de firebase, primer hace busqueda de la ruta
             return (await ConexionFirebase.FBCliente
                 .Child("Servicios")
                 .Child("Vehiculos")
                 .OnceAsync<MVehiculos>())
                 .Select(Item => new MVehiculos
                 {
+                    // esta sección se encarga de tomar los datos de firebase y agregarlos a su
+                    // respectiva variable en el modelo
                     IdVehiculo = Item.Key,
                     NumeroEconomico = Item.Object.NumeroEconomico,
                     Modelo = Item.Object.Modelo,
@@ -59,9 +42,9 @@ namespace CMP.Datos
                     Estado = Item.Object.Estado,
                     Combustible = Item.Object.Combustible,
                     RendimientoxMes = Item.Object.RendimientoxMes,
-                }).ToList();
+                }).ToList(); // regresa los datos como una lista para ser mostrados en una colección
         }
-                
+
 
         public async Task InsertarVehiculo(MVehiculos parametro)
         {
@@ -69,7 +52,7 @@ namespace CMP.Datos
             parametro.HoraFinal = 0;
             int res = parametro.HoraFinal - parametro.HoraInicial;
             parametro.HoraDeUso = res;
-            double Rendimiento = parametro.Combustible/res;
+            double Rendimiento = parametro.Combustible / res;
             parametro.RendimientoxMes = Rendimiento;
             await ConexionFirebase.FBCliente
                 .Child("Servicios")
@@ -98,7 +81,7 @@ namespace CMP.Datos
         }
         public async Task EditarVehiculo(MVehiculos parametro)
         {
-            
+
             //se busca al item
             var data = (await ConexionFirebase.FBCliente
                 .Child("Servicios")
@@ -107,7 +90,7 @@ namespace CMP.Datos
                 .Where(a => a.Key == parametro.IdVehiculo)
                 .FirstOrDefault();
 
-            //se actualizan los d
+            //se actualizan los datos
             await ConexionFirebase.FBCliente
                 .Child("Servicios")
                 .Child("Vehiculos")
@@ -125,9 +108,9 @@ namespace CMP.Datos
                     TiempoVidaLlantas = parametro.TiempoVidaLlantas,
                     DatosExtras = parametro.DatosExtras,
                     Observaciones = parametro.Observaciones,
-                    Estado = parametro.Estado,                     
+                    Estado = parametro.Estado,
                     HoraInicial = parametro.HoraInicial,
-                    HoraFinal = parametro.HoraFinal,                   
+                    HoraFinal = parametro.HoraFinal,
                     Combustible = parametro.Combustible,
                     RendimientoxMes = parametro.RendimientoxMes,
                 });

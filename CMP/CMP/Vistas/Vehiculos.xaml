@@ -23,13 +23,13 @@
         </Frame>
 
         <Grid RowDefinitions="*">
-            
 
             <ScrollView>
                 <StackLayout VerticalOptions="Start"
                              Margin="10,12,10,0"
                              Orientation="Vertical"
                              Spacing="20">
+                    <!--colección donde se mostraran los elementros traidos de Firebase-->
                     <CollectionView x:Name="listaCar"
                                     ItemsSource="{Binding ListaVehiculos}">
 
@@ -38,12 +38,14 @@
                                              Span="1"
                                              VerticalItemSpacing="20" />
                         </CollectionView.ItemsLayout>
+                        <!--template encargado de dar formato a cada componente de la colección-->
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <Frame CornerRadius="15"
                                        BackgroundColor="#F0DCE6"
                                        BorderColor="#EEEDED"
                                        HasShadow="False">
+                                    <!--Gride encargado de organizar los datos dentro del frame-->
                                     <Grid HorizontalOptions="FillAndExpand">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="1,*" />
@@ -62,13 +64,14 @@
                                                HorizontalOptions="Start"
                                                Grid.RowSpan="2"
                                                Grid.Column="0" />
+
                                         <Label Text="{Binding NumeroEconomico}"
                                                HorizontalOptions="StartAndExpand"
                                                VerticalOptions="Center"
                                                FontAttributes="Bold"
                                                Grid.RowSpan="2"
                                                Grid.Column="1" />
-                                        <Label Text="{Binding Kilomtraje}"
+                                        <Label Text="{Binding Kilomtraje, StringFormat='{0} km'}"
                                                HorizontalOptions="End"
                                                VerticalOptions="Center"
                                                FontSize="15"
@@ -80,19 +83,20 @@
                                                FontSize="15"
                                                Grid.Row="1"
                                                Grid.Column="2"
-                                               TextColor="{Binding ColorCommand}" />
+                                               TextColor="{Binding ColorCommand}"
+                                               BindingContextChanged="Label_BindingContextChanged" />
                                     </Grid>
+                                    <!--fragmento encargado de detectar los clics en los elementos para enviarlos a la vista DataVehiculos-->
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding 
-                                                              Path = BindingContext.NavDataVehiculoCommand,
-                                                              Source={x:Reference listaCar}}"
+                                            Path = BindingContext.NavDataVehiculoCommand,
+                                            Source={x:Reference listaCar}}"
                                                               CommandParameter="{Binding .}" />
                                     </Frame.GestureRecognizers>
                                 </Frame>
-                                
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
-                        
+
                     </CollectionView>
                 </StackLayout>
             </ScrollView>
