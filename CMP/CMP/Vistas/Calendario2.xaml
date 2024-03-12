@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CMP.Vistas.Calendario2"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="White"
+             Visual="Material">
+    <StackLayout Spacing="20">
+        <Frame BackgroundColor="#D48593"
+               HorizontalOptions="FillAndExpand"
+               CornerRadius="0"
+               HeightRequest="64"
+               Margin="0"
+               Padding="0"
+               HasShadow="False">
+            <Grid ColumnDefinitions="64">
+                <ImageButton Source="back.png"
+                             BackgroundColor="#D48593"
+                             HorizontalOptions="Start"
+                             Grid.Column="0"
+                             Margin="15,0,0,0"
+                             Command="{Binding VolverMenuCommand}" />
+                <Label Text="CalMaP"
+                       HorizontalOptions="End"
+                       VerticalOptions="Center"
+                       FontSize="23"
+                       FontAttributes="Bold"
+                       Margin="0,0,40,0"
+                       TextColor="White"
+                       Grid.Column="1" />
+            </Grid>
+        </Frame>
+
+        <Frame Margin="20,0,20,0"
+               CornerRadius="15">
+            <StackLayout Orientation="Vertical">
+                <Label Text=" Seleccione Fecha"
+                       FontSize="18"
+                       Margin="12,0,0,10"
+                       Padding="0"
+                       FontAttributes="Bold" />
+                <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="CenterAndExpand">
+                    <DatePicker x:Name="DateFechas"
+                                Format="dd-MM-yyyy"
+                                Date="{Binding Fecha, Mode=TwoWay}"
+                                FontSize="16"
+                                BackgroundColor="White" />
+                    <Button  Text="Buscar"
+                             x:Name="BttnEliminar"
+                             Command="{Binding BuscarFechaCommand}"
+                             VerticalOptions="Center"
+                             FontSize="15"
+                             Grid.Row="3"
+                             Grid.ColumnSpan="3"
+                             FontAttributes="Bold"
+                             Padding="0,10"
+                             BackgroundColor="#BE5165"
+                             TextColor="White"
+                             CornerRadius="10"
+                             Margin="20,0,0,0" />
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+
+        <Frame Margin="20,0,20,0"
+               CornerRadius="15">
+            <CollectionView x:Name="ListaServicios"
+                            ItemsSource="{Binding ListaFecha}"
+                            HeightRequest="500">
+
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     Span="1"
+                                     VerticalItemSpacing="20" />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame CornerRadius="15"
+                               BackgroundColor="#F7F6F6"
+                               BorderColor="#EEEDED"
+                               HasShadow="False">
+                            <Grid HorizontalOptions="FillAndExpand">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1,*" />
+                                    <RowDefinition Height="1,*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50,*" />
+                                    <ColumnDefinition Width="150,*" />
+                                    <ColumnDefinition Width="83,*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Text="{Binding NumeroEconomico}"
+                                       HorizontalOptions="StartAndExpand"
+                                       VerticalOptions="Center"
+                                       FontAttributes="Bold"
+                                       Grid.RowSpan="2"
+                                       Grid.ColumnSpan="2"
+                                       Margin="10"
+                                       x:Name="NumeroEconomico" />
+                                <Label Text="{Binding Fechas}"
+                                       HorizontalOptions="End"
+                                       VerticalOptions="Center"
+                                       FontSize="15"
+                                       Grid.Row="0"
+                                       Grid.Column="2"
+                                       x:Name="Fechas" />
+                                <Label Text="{Binding TipoServicio}"
+                                       HorizontalOptions="End"
+                                       VerticalOptions="Center"
+                                       FontSize="15"
+                                       Grid.Row="1"
+                                       Grid.Column="2"
+                                       x:Name="TipoServicio" />
+                            </Grid>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding 
+                      Path = BindingContext.NavDataBitacoraCommand,
+                      Source={x:Reference ListaServicios}}"
+                                                      CommandParameter="{Binding .}" />
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+        </Frame>
+
+    </StackLayout>
+</ContentPage>

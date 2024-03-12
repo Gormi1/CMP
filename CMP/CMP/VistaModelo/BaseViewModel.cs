@@ -1,5 +1,6 @@
 ﻿// using System;
 // using System.Text;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -49,8 +50,26 @@ namespace CMP.VistaModelo
         //1 btn
         public async Task DisplayAlert(string title, string message, string cancel)
         {
-            await Application.Current.MainPage.DisplayAlert(title, message, cancel);
+            try
+            {
+                if (Application.Current?.MainPage != null)
+                {
+                    await Application.Current.MainPage.DisplayAlert(title, message, cancel);
+                }
+                else
+                {
+                    // Manejar el caso en el que Application.Current o MainPage son null en un entorno de prueba
+                    Console.WriteLine($"DisplayAlert: Title: {title}, Message: {message}, Cancel: {cancel}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error displaying alert: {ex.Message}");
+            }
+
+            await Task.CompletedTask;
         }
+
 
 
         //2 btns

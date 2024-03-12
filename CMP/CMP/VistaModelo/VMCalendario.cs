@@ -1,4 +1,7 @@
-﻿using CMP.Vistas;
+﻿using CMP.Datos;
+using CMP.Modelo;
+using CMP.Vistas;
+using CMP.Vistas.FormServicios;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,178 +9,90 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
-using XamForms.Controls;
 
 namespace CMP.VistaModelo
 {
     internal class VMCalendario : BaseViewModel
     {
         #region VARIABLES
-        private DateTime? _date;
-        private ObservableCollection<SpecialDate> attendances;
+        private List<MServicios> _Lista; // Lista de servicios para una fecha específica
+        private DateTime _Fecha; // Fecha seleccionada en el calendario
+        private string _ResultadoFecha; // Representación formateada de la fecha
+        public MServicios Servicios { get; set; } // Objeto de tipo MServicios
         #endregion
 
         #region CONSTRUCTOR
+        // Constructor que recibe la navegación y establece la fecha actual
         public VMCalendario(INavigation navigation)
         {
-            Initialize();
             Navigation = navigation;
+            Fecha = DateTime.Now;
         }
         #endregion
 
         #region OBJETOS
-
-        public DateTime? Date
+        // Propiedad para la fecha, actualizando el resultado formateado al cambiar la fecha
+        public DateTime Fecha
         {
-            get
-            {
-                return _date;
-            }
+            get { return _Fecha; }
             set
             {
-                _date = value;
-                NotifyPropertyChanged(nameof(Date));
+                SetValue(ref _Fecha, value);
+                ResultadoFecha = _Fecha.ToString("dd-MM-yyyy");
             }
         }
-        public ObservableCollection<SpecialDate> Attendances
+
+        // Propiedad para la representación formateada de la fecha
+        public string ResultadoFecha
         {
-            get { return attendances; }
-            set { attendances = value; NotifyPropertyChanged(nameof(Attendances)); }
+            get { return _ResultadoFecha; }
+            set { SetValue(ref _ResultadoFecha, value); }
         }
 
-        private void Initialize()
+        // Lista de servicios para una fecha específica
+        public List<MServicios> ListaFecha
         {
-            var dates = new List<SpecialDate>();
-
-            var grayColor = Color.FromHex("#CCE5E5E5");
-
-            Attendances = new ObservableCollection<SpecialDate>(dates) {
-                new SpecialDate(DateTime.Now.AddDays(3))
-                {
-                    Selectable = true,
-                    BackgroundPattern = new BackgroundPattern(1)
-                    {
-                        Pattern = new List<Pattern>
-                        {
-                            new Pattern{ WidthPercent = 1f, HightPercent = 0.7f, Color = Color.White},
-                            new Pattern{ WidthPercent = 1f, HightPercent = 0.3f, Color = Color.Yellow,Text = "Vacation", TextColor=Color.DarkBlue, TextSize=8, TextAlign=TextAlign.Middle},
-                        }
-                    }
-                },
-                new SpecialDate(DateTime.Now.AddDays(5))
-                {
-                    Selectable = true,
-                    BackgroundPattern = new BackgroundPattern(1)
-                    {
-                        Pattern = new List<Pattern>
-                        {
-                            new Pattern{ WidthPercent = 1f, HightPercent = 0.7f, Color = Color.White},
-                            new Pattern{ WidthPercent = 1f, HightPercent = 0.3f, Color = Color.LightGreen, Text = "Absence", TextColor=Color.DarkBlue, TextSize=8, TextAlign=TextAlign.Middle},
-                        }
-                    }
-                },
-                new SpecialDate(DateTime.Now.AddDays(4))
-                {
-                    Selectable = true,
-                    BackgroundPattern = new BackgroundPattern(1)
-                    {
-                        Pattern = new List<Pattern>
-                        {
-                            new Pattern{ WidthPercent = 1f, HightPercent = 0.7f, Color = grayColor},
-                            new Pattern{ WidthPercent = 1f, HightPercent = 0.15f, Color = Color.Yellow, Text = "Vacation", TextColor=Color.DarkBlue, TextSize=8, TextAlign=TextAlign.Middle},
-                            new Pattern{ WidthPercent = 1f, HightPercent = 0.15f, Color = Color.LightGreen, Text = "Absence", TextColor=Color.DarkBlue, TextSize=8, TextAlign=TextAlign.Middle},
-                        }
-                    }
-                },
-                new SpecialDate(DateTime.Now.AddDays(6))
-                {
-                    Selectable = true,
-                    BackgroundPattern = new BackgroundPattern(1)
-                    {
-                        Pattern = new List<Pattern>
-                        {
-                            new Pattern{ WidthPercent = 1f, HightPercent = 0.7f, Color = grayColor},
-                            new Pattern{ WidthPercent = 1f, HightPercent = 0.3f, Color = Color.LightGreen, Text = "Absence", TextColor=Color.DarkBlue, TextSize=11, TextAlign=TextAlign.Middle},
-                        }
-                    }
-                },
-                new SpecialDate(DateTime.Now)
-                {
-                    Selectable = true,
-                    TextColor = Color.FromHex("#BE5165"),
-                    FontAttributes = FontAttributes.Bold
-                },
-                new SpecialDate(DateTime.Now.AddDays(1))
-                {
-                    Selectable = true,
-                    BackgroundPattern = new BackgroundPattern(1)
-                    {
-                        Pattern = new List<Pattern>
-                        {
-                            new Pattern{ WidthPercent = 1f, HightPercent = 1f, Color = grayColor},
-                        }
-                    }
-                },
-                new SpecialDate(DateTime.Now.AddDays(2))
-                {
-                    Selectable = true,
-                    BackgroundPattern = new BackgroundPattern(1)
-                    {
-                        Pattern = new List<Pattern>
-                        {
-                            new Pattern{ WidthPercent = 1f, HightPercent = 1f, Color = grayColor},
-                        }
-                    }
-                },
-                new SpecialDate(DateTime.Now.AddDays(8))
-                {
-                    Selectable = true,
-                    BackgroundPattern = new BackgroundPattern(1)
-                    {
-                        Pattern = new List<Pattern>
-                        {
-                            new Pattern{ WidthPercent = 1f, HightPercent = 1f, Color = grayColor},
-                        }
-                    }
-                },
-                new SpecialDate(DateTime.Now.AddDays(9))
-                {
-                    Selectable = true,
-                    BackgroundPattern = new BackgroundPattern(1)
-                    {
-                        Pattern = new List<Pattern>
-                        {
-                            new Pattern{ WidthPercent = 1f, HightPercent = 1f, Color = grayColor},
-                        }
-                    }
-                },
-
-            };
+            get { return _Lista; }
+            set { SetValue(ref _Lista, value); }
         }
-
         #endregion
 
         #region PROCESOS
+        // Método para regresar al menú principal
         public async Task RegresarAMenu()
         {
             await Navigation.PopAsync();
         }
-        //public void ProcesoSimple()
-        //{
 
-        //}
+        // Método para obtener servicios para la fecha seleccionada
+        public async Task<List<MServicios>> ObtenerFechas()
+        {
+            var funcion = new DBitacora();
+
+            // Llama a la capa de datos para obtener servicios para la fecha seleccionada
+            ListaFecha = await funcion.ObtenerServiciosxfecha(ResultadoFecha);
+
+            Console.Write($"resultados: {ListaFecha}");
+
+            return ListaFecha;
+        }
+
+        // Método para navegar a la pantalla de detalles de la bitácora
+        public async Task IraDataBitacora(MServicios parametro)
+        {
+            await Navigation.PushAsync(new DataBitacora(parametro));
+        }
         #endregion
 
         #region COMANDOS
-        public Command DateChosenCommand => new Command((obj) =>
-        {
-            System.Diagnostics.Debug.WriteLine(obj as DateTime?);
-        });
-
+        // Comando para volver al menú principal
         public ICommand VolverMenuCommand => new Command(async () => await RegresarAMenu());
 
+        // Comando para navegar a la pantalla de detalles de la bitácora con un parámetro
+        public ICommand NavDataBitacoraCommand => new Command<MServicios>(async (p) => await IraDataBitacora(p));
 
-        //public ICommand ProcesoSimpleCommand => new Command(ProcesoSimple);
+        // Comando para buscar servicios para la fecha seleccionada
+        public ICommand BuscarFechaCommand => new Command(async () => await ObtenerFechas());
         #endregion
     }
 }

@@ -23,9 +23,6 @@ namespace CMP.Modelo
         public string DatosExtras { get; set; }
         public string Observaciones { get; set; }
         public double Combustible { get; set; }
-
-
-        // (sumatoria de combustible total) / Horas trabajadas = RendimientoMensual de combustible
         public double RendimientoxMes { get; set; }
     }
 }

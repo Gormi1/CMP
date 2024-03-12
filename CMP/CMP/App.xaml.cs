@@ -1,5 +1,8 @@
-﻿using CMP.Vistas;
+﻿using CMP.Datos;
+using CMP.Modelo;
+using CMP.Vistas;
 using System;
+using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -24,5 +27,7 @@ namespace CMP
         protected override void OnResume()
         {
         }
+
+        public List<MServicios> ServiciosData { get; set; }
     }
 }

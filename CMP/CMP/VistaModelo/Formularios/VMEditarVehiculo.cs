@@ -1,8 +1,5 @@
 ﻿using CMP.Datos;
 using CMP.Modelo;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -47,8 +44,10 @@ namespace CMP.VistaModelo.Formularios
         #region PROCESOS
         public async Task EditarVehiculo()
         {
+            //objeto DVehiculos
             var funcion = new Dvehiculos();
 
+            //guarda los datos modificados en el estado
             Parametrosrecive.Estado = Estado;
             Parametrosrecive.DatosExtras = DatosExtras;
             Parametrosrecive.Observaciones = Observaciones;
@@ -56,11 +55,12 @@ namespace CMP.VistaModelo.Formularios
             Parametrosrecive.HoraFinal = HoraFinal;
             Parametrosrecive.Kilomtraje += Kilometraje;
             Parametrosrecive.Combustible += Combustible;
+            //realiza calculos necesarios sobre la información del vehiculo
             int res = Parametrosrecive.HoraInicial - Parametrosrecive.HoraFinal;
             Parametrosrecive.HoraDeUso += Parametrosrecive.HoraInicial;
             double Rendimiento = Parametrosrecive.Combustible / res;
             Parametrosrecive.RendimientoxMes = Rendimiento;
-
+            //se guardan los datos modirficados y se mandan a Firebase
             await funcion.EditarVehiculo(Parametrosrecive);
             await DisplayAlert("Vehiculo Guardado", "Datos guardados Correctamente", "Aceptar");
             VaciarCampos();
@@ -87,14 +87,9 @@ namespace CMP.VistaModelo.Formularios
             Nombre = "";
             Tipo = "";
             NumeroDeSerie = "";
-            Kilometraje = 0;
-            CantLlantas = 0;
             DatosExtras = "";
             Observaciones = "";
             Estado = "";
-            HoraInicial = 0;
-            HoraFinal = 0;
-            Combustible = 0;
         }
         public async Task RegresaraMenu()
         {
